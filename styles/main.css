@@ -1,0 +1,9 @@
+.navbar-item.has-dropdown.is-hoverable:hover .navbar-dropdown {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 600px;
+}
+
+.navbar-item.has-dropdown.is-hoverable:hover .navbar-dropdown .navbar-item {
+  flex: 40%;
+}
