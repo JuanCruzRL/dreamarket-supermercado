@@ -7,3 +7,31 @@
 .navbar-item.has-dropdown.is-hoverable:hover .navbar-dropdown .navbar-item {
   flex: 40%;
 }
+
+.dm-btn {
+  border-radius: 999px;
+  font-weight: 600;
+  padding: 0.6rem 1.6rem;
+}
+
+.button.is-primary,
+.dm-btn.is-primary,
+.button.is-primary.dm-btn {
+  background-color: #1976d2;
+  border-color: #1976d2;
+  color: #fff;
+}
+
+.button.is-primary:hover,
+.dm-btn.is-primary:hover,
+.button.is-primary.dm-btn:hover {
+  background-color: #1259a3;
+  border-color: #1259a3;
+}
+
+.dm-img-small {
+  width: 180px;
+  height: 120px;
+  object-fit: contain;
+  display: block;
+}
