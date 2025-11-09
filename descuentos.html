@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+  />
+  <link rel="stylesheet" href="styles/main.css" />
+  <title>Dreamarket - Descuentos</title>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="logo" href="./index.html">
+        <img src="imagenes/logo.png" alt="Dreamarket" width="112" height="50"/>
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item is-active" href="./descuentos.html">
+          Descuentos
+        </a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">Productos</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item">Lácteos</a>
+            <a class="navbar-item">Carnes</a>
+            <a class="navbar-item">Vinos</a>
+            <a class="navbar-item">Snacks</a>
+            <a class="navbar-item">Refrigerio</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-primary" href="./carrito.html">
+              <strong>Carrito 🛒</strong>
+            </a>
+            <a class="button is-light">Crear cuenta</a>
+            <a class="button is-light">Ingresar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SECCIÓN DESCUENTOS -->
+  <section class="section">
+    <div class="container">
+      <h1 class="title">Descuentos del día</h1>
+      <p class="subtitle">Aprovechá las mejores ofertas disponibles hoy</p>
+
+      <div class="columns is-multiline">
+
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="imagenes/carne.png" alt="Carne vacuna">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-6">Bife de chorizo 1kg</p>
+              <p class="subtitle is-6"><s>$18.200</s> <strong>$11.300</strong></p>
+              <button class="button is-danger is-small">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="imagenes/vino.png" alt="Vino">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-6">Vino 750ml</p>
+              <p class="subtitle is-6"><s>$4.150</s> <strong>$2.999</strong></p>
+              <button class="button is-danger is-small">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="imagenes/pan.png" alt="Pan artesanal">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-6">Pan integral 500g</p>
+              <p class="subtitle is-6"><s>$5.250</s> <strong>$4.150</strong></p>
+              <button class="button is-danger is-small">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="imagenes/leche.png" alt="Leche entera">
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title is-6">Leche entera 1L</p>
+              <p class="subtitle is-6"><s>$1350</s> <strong>$999</strong></p>
+              <button class="button is-danger is-small">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>Dreamarket — Descuentos</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT NAVBAR -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const burger = document.querySelector('.navbar-burger');
+      const menu = document.getElementById(burger.dataset.target);
+      burger.addEventListener('click', () => {
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+      });
+    });
+  </script>
+
+</body>
+</html>
