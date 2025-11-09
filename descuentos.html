@@ -11,7 +11,7 @@
   <title>Dreamarket - Descuentos</title>
 </head>
 <body>
-  <!-- NAVBAR -->
+
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="logo" href="./index.html">
@@ -25,37 +25,89 @@
     </div>
 
     <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item is-active" href="./descuentos.html">
-          Descuentos
+    <div class="navbar-start">
+      <a class="navbar-item is-active" href="./descuentos.html">
+        Descuentos
+      </a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Almacen
         </a>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">Productos</a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item">Lácteos</a>
-            <a class="navbar-item">Carnes</a>
-            <a class="navbar-item">Vinos</a>
-            <a class="navbar-item">Snacks</a>
-            <a class="navbar-item">Refrigerio</a>
-          </div>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">Golosinas</a>
+          <a class="navbar-item">Panadería</a>
+          <a class="navbar-item">Snacks</a>
+          <a class="navbar-item">Aceites y condimentos</a>
+          <a class="navbar-item">Mermeladas y dulces</a>
+          <a class="navbar-item">Galletitas</a>
+          <a class="navbar-item">Conservas y enlatados</a>
+          <a class="navbar-item">Harinas y pastas</a>
         </div>
       </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Bebidas
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">Bebidas sin alcohol</a>
+          <a class="navbar-item">Bebidas alcohólicas</a>
+          <a class="navbar-item">Infusiones</a>
 
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <a class="button is-primary" href="./carrito.html">
-              <strong>Carrito 🛒</strong>
-            </a>
-            <a class="button is-light">Crear cuenta</a>
-            <a class="button is-light">Ingresar</a>
-          </div>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Congelados
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">Verduras congeladas</a>
+        <a class="navbar-item">Papas fritas</a>
+        <a class="navbar-item">Hamburguesas</a>
+        <a class="navbar-item">Helados</a>
+        <a class="navbar-item">Frutas congeladas</a>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Limpieza
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">Detergentes</a>
+        <a class="navbar-item">Desinfectantes</a>
+        <a class="navbar-item">Lavandina</a>
+        <a class="navbar-item">Suavizantes</a>
+        <a class="navbar-item">Escobas y trapos</a>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Carnes
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">Carne vacuna</a>
+        <a class="navbar-item">Pollo</a>
+        <a class="navbar-item">Cerdo</a>
+        <a class="navbar-item">Pescado</a>
+        <a class="navbar-item">Embutidos</a>
         </div>
       </div>
     </div>
+    
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary" href="./carrito.html">
+            <strong>Carrito 🛒</strong>
+          </a>
+          <a class="button is-light" href="./ingresar.html">
+            Ingresar👤
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
   </nav>
 
-  <!-- SECCIÓN DESCUENTOS -->
   <section class="section">
     <div class="container">
       <h1 class="title">Descuentos del día</h1>
@@ -127,24 +179,55 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer">
-    <div class="content has-text-centered">
-      <p>Dreamarket — Descuentos</p>
+    <div class="container">
+      <div class="columns">
+        <div class="column is-3">
+          <p class="title is-6 mb-3">Dreammarket</p>
+          <p class="is-size-7">
+            Tu supermercado online: frescos, almacén, limpieza y más,
+            con entrega rápida y segura.
+          </p>
+        </div>
+        <div class="column is-3">
+          <p class="title is-6 mb-3">Ayuda</p>
+          <ul class="is-size-7">
+            <li><a href="/envios.html">Envíos y horarios</a></li>
+            <li><a href="/devoluciones.html">Devoluciones</a></li>
+            <li><a href="/preguntas-frecuentes.html">Preguntas frecuentes</a></li>
+            <li><a href="/contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="column is-3">
+          <p class="title is-6 mb-3">Medios de pago</p>
+          <ul class="is-size-7">
+            <li>Tarjetas de crédito y débito</li>
+            <li>Transferencia / depósito</li>
+            <li>Mercado Pago</li>
+          </ul>
+        </div>
+        <div class="column is-3">
+          <p class="title is-6 mb-3">Contacto</p>
+          <p class="is-size-7">
+            WhatsApp:
+            <a href="https://wa.me/5491112345678">+54 9 11 1234-5678</a><br>
+            Email:
+            <a href="mailto:hola@dreammarket.com">hola@dreammarket.com</a>
+          </p>
+
+          <p class="title is-6 mb-2 mt-4">Seguinos</p>
+          <div class="buttons">
+            <a class="button is-small is-light" href="#" target="_blank">Instagram</a>
+            <a class="button is-small is-light" href="#" target="_blank">Facebook</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="has-text-centered is-size-7 mt-5">
+        © 2025 Dreammarket · Todos los derechos reservados
+      </div>
     </div>
   </footer>
-
-  <!-- SCRIPT NAVBAR -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const burger = document.querySelector('.navbar-burger');
-      const menu = document.getElementById(burger.dataset.target);
-      burger.addEventListener('click', () => {
-        burger.classList.toggle('is-active');
-        menu.classList.toggle('is-active');
-      });
-    });
-  </script>
 
 </body>
 </html>
