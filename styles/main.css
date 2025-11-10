@@ -41,3 +41,9 @@
   left: 100%;
   margin-left: 0.5rem;
 }
+
+.dreamweek-tag {
+  margin-top: 5px; 
+  background-color: rgb(68, 1, 131); 
+  color: white
+}

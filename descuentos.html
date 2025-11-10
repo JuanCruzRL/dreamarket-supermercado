@@ -8,6 +8,7 @@
     href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
   />
   <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <title>Dreamarket - Descuentos</title>
 </head>
 <body>
@@ -110,6 +111,33 @@
 
   <section class="section">
     <div class="container">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <figure class="image is-5by1">
+              <img src="imagenes/banner_ofertas.png">
+            </figure>
+          </div>
+          <div class="swiper-slide">
+            <figure class="image is-16by7">
+              <img src="imagenes/banner_ofertas2.png">
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    new Swiper('.swiper', {
+      loop: true,
+      autoplay: { delay: 3000 }
+    });
+  </script>
+
+  <section class="section">
+    <div class="container">
       <h1 class="title">Descuentos del día</h1>
       <p class="subtitle">Aprovechá las mejores ofertas disponibles hoy</p>
 
@@ -125,7 +153,7 @@
             <div class="card-content has-text-centered">
               <p class="title is-6">Bife de chorizo 1kg</p>
               <p class="subtitle is-6"><s>$18.200</s> <strong>$12.740</strong> <br>
-                <span class="tag is-danger is-light" style="margin-top: 5px">40% OFF</span>
+                <span class="tag is-danger is-light" style="margin-top: 5px">30% OFF</span>
               </p>
               <button class="button is-danger is-small">Agregar</button>
             </div>
@@ -187,92 +215,179 @@
     </div>
   </section>
 
+  <hr>
+  
   <section class="section">
-  <div class="container">
-    <h1 class="title">3x2 en los siguientes productos</h1>
-    <p class="subtitle">Stockeate sin gastar de más!</p>
+    <div class="container">
+      <h1 class="title">3x2 en los siguientes productos</h1>
+      <p class="subtitle">Stockeate sin gastar de más!</p>
 
-    <div class="columns is-multiline">
+      <div class="columns is-multiline">
 
-      <!-- Card 1 -->
-      <div class="column is-one-quarter">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="./imagenes/papablanca.jpeg">
-            </figure>
-          </div>
-          <div class="card-content has-text-centered">
-            <p class="title is-6">Papa blanca 1kg</p>
-            <p class="subtitle is-6">
-              <strong>$1.200</strong> <br>
-              <span class="tag is-danger is-light" style="margin-top: 5px">3x2 disponible</span>
-            </p>
-            <button class="button is-danger is-small">Agregar</button>
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="./imagenes/papablanca.jpeg">
+              </figure>
+            </div>
+            <div class="card-content has-text-centered">
+              <p class="title is-6">Papa blanca 1kg</p>
+              <p class="subtitle is-6">
+                <strong>$1.200</strong> <br>
+                <span class="tag is-danger is-light" style="margin-top: 5px">3x2 disponible</span>
+              </p>
+              <button class="button is-danger is-small">Agregar</button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Card 2 -->
-      <div class="column is-one-quarter">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="./imagenes/cocacola.jpeg">
-            </figure>
-          </div>
-          <div class="card-content has-text-centered">
-            <p class="title is-6">Gaseosa Coca-Cola 1,75l</p>
-            <p class="subtitle is-6">
-              <strong>$2.600</strong> <br>
-              <span class="tag is-danger is-light" style="margin-top: 5px">3x2 disponible</span>
-            </p>
-            <button class="button is-danger is-small">Agregar</button>
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="./imagenes/cocacola.jpeg">
+              </figure>
+            </div>
+            <div class="card-content has-text-centered">
+              <p class="title is-6">Gaseosa Coca-Cola 1,75l</p>
+              <p class="subtitle is-6">
+                <strong>$2.600</strong> <br>
+                <span class="tag is-danger is-light" style="margin-top: 5px">3x2 disponible</span>
+              </p>
+              <button class="button is-danger is-small">Agregar</button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Card 3 -->
-      <div class="column is-one-quarter">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="./imagenes/aguavilladelsur.jpeg">
-            </figure>
-          </div>
-          <div class="card-content has-text-centered">
-            <p class="title is-6">Agua mineral Villa del Sur 2,25l</p>
-            <p class="subtitle is-6">
-              <strong>$1.320</strong> <br>
-              <span class="tag is-danger is-light" style="margin-top: 5px">3x2 disponible</span>
-            </p>
-            <button class="button is-danger is-small">Agregar</button>
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="./imagenes/aguavilladelsur.jpeg">
+              </figure>
+            </div>
+            <div class="card-content has-text-centered">
+              <p class="title is-6">Agua mineral Villa del Sur 2,25l</p>
+              <p class="subtitle is-6">
+                <strong>$1.320</strong> <br>
+                <span class="tag is-danger is-light" style="margin-top: 5px">3x2 disponible</span>
+              </p>
+              <button class="button is-danger is-small">Agregar</button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Card 4 -->
-      <div class="column is-one-quarter">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="./imagenes/pepitos.jpeg">
-            </figure>
-          </div>
-          <div class="card-content has-text-centered">
-            <p class="title is-6">Galletitas Pepitos 119g.</p>
-            <p class="subtitle is-6">
-              <strong>$1.350</strong> <br>
-              <span class="tag is-danger is-light" style="margin-top: 5px">3x2 disponible</span>
-            </p>
-            <button class="button is-danger is-small">Agregar</button>
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="./imagenes/pepitos.jpeg">
+              </figure>
+            </div>
+            <div class="card-content has-text-centered">
+              <p class="title is-6">Galletitas Pepitos 119g.</p>
+              <p class="subtitle is-6">
+                <strong>$1.350</strong> <br>
+                <span class="tag is-danger is-light" style="margin-top: 5px">3x2 disponible</span>
+              </p>
+              <button class="button is-danger is-small">Agregar</button>
+            </div>
           </div>
         </div>
-      </div>
 
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <hr>
+
+  <section class="section">
+    <div class="container">
+      <h1 class="title" id="Dreamweek">¡Especial Dreamweek!</h1>
+      <p class="subtitle">La semana que siempre soñaste, con los mejores precios!</p>
+
+      <div class="columns is-multiline">
+
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="./imagenes/cafetostadomolido.jpg">
+              </figure>
+            </div>
+            <div class="card-content has-text-centered">
+              <p class="title is-6">Cafe tostado mólido Cabrales 500g.</p>
+              <p class="subtitle is-6">
+                <s>$20.000</s> <strong>$14.000</strong> <br>
+                <span class="tag dreamweek-tag">Dreamweek!</span>
+                <span class="tag is-danger is-light" style="margin-top: 5px">30% OFF</span>
+              </p>
+              <button class="button is-danger is-small">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="./imagenes/chocolatemilka.jpg">
+              </figure>
+            </div>
+            <div class="card-content has-text-centered">
+              <p class="title is-6">Chocolate Milka Oreo Blanco 20g.</p>
+              <p class="subtitle is-6">
+                <s>$1.400</s> <strong>$700</strong> <br>
+                <span class="tag dreamweek-tag">Dreamweek!</span>
+                <span class="tag is-danger is-light" style="margin-top: 5px">50% OFF</span>
+              </p>
+              <button class="button is-danger is-small">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="./imagenes/rumba.jpg">
+              </figure>
+            </div>
+            <div class="card-content has-text-centered">
+              <p class="title is-6">Galletitas Rumba 110g.</p>
+              <p class="subtitle is-6">
+                <s>$1.400</s> <strong>$980</strong> <br>
+                <span class="tag dreamweek-tag">Dreamweek!</span>
+                <span class="tag is-danger is-light" style="margin-top: 5px">30% OFF</span>
+              </p>
+              <button class="button is-danger is-small">Agregar</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="./imagenes/matecocido.jpg">
+              </figure>
+            </div>
+            <div class="card-content has-text-centered">
+              <p class="title is-6">Mate cocido Nobleza Gaucha x25u</p>
+              <p class="subtitle is-6">
+                <s>$1.350</s> <strong>$810</strong> <br>
+                <span class="tag dreamweek-tag">Dreamweek!</span>
+                <span class="tag is-danger is-light" style="margin-top: 5px">40% OFF</span>
+              </p>
+              <button class="button is-danger is-small">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
 
   <footer class="footer">
     <div class="container">
