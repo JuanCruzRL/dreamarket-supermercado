@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+  />
+  <link rel="stylesheet" href="styles/main.css" />
+  <title>Productos</title>
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="logo" href="./index.html">
+      <img src="imagenes/logo.png" alt="Dreamarket" width="112" height="50"/>
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="./descuentos.html">
+        Descuentos
+      </a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Almacen
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">Golosinas</a>
+          <a class="navbar-item">Panadería</a>
+          <a class="navbar-item">Snacks</a>
+          <a class="navbar-item">Aceites y condimentos</a>
+          <a class="navbar-item">Mermeladas y dulces</a>
+          <a class="navbar-item">Galletitas</a>
+          <a class="navbar-item">Conservas y enlatados</a>
+          <a class="navbar-item">Harinas y pastas</a>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Bebidas
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">Bebidas sin alcohol</a>
+          <a class="navbar-item">Bebidas alcohólicas</a>
+          <a class="navbar-item">Infusiones</a>
+
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Congelados
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">Verduras congeladas</a>
+        <a class="navbar-item">Papas fritas</a>
+        <a class="navbar-item">Hamburguesas</a>
+        <a class="navbar-item">Helados</a>
+        <a class="navbar-item">Frutas congeladas</a>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Limpieza
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">Detergentes</a>
+        <a class="navbar-item">Desinfectantes</a>
+        <a class="navbar-item">Lavandina</a>
+        <a class="navbar-item">Suavizantes</a>
+        <a class="navbar-item">Escobas y trapos</a>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Carnes
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">Carne vacuna</a>
+        <a class="navbar-item">Pollo</a>
+        <a class="navbar-item">Cerdo</a>
+        <a class="navbar-item">Pescado</a>
+        <a class="navbar-item">Embutidos</a>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary" href="./carrito.html">
+            <strong>Carrito 🛒</strong>
+          </a>
+          <a class="button is-light" href="./ingresar.html">
+            Ingresar👤
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  <section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-3">
+        <div class="box dm-filter">
+          <aside class="menu">
+            <p class="menu-label">Categoría</p>
+            <ul class="menu-list">
+              <li>
+                <div class="dropdown is-hoverable is-right">
+  <div class="dropdown-trigger">
+    <button class="menu-list" aria-haspopup="true" aria-controls="dropdown-menu">
+      <span>Almacén</span>
+      <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+    <div class="dropdown-content">
+      <a href="#" class="dropdown-item"> Dropdown item </a>
+      <a class="dropdown-item"> Other dropdown item </a>
+      <a href="#" class="dropdown-item is-active"> Active dropdown item </a>
+      <a href="#" class="dropdown-item"> Other dropdown item </a>
+      <hr class="dropdown-divider" />
+      <a href="#" class="dropdown-item"> With a divider </a>
+    </div>
+  </div>
+</div>
+              </li>
+              <li>
+                <div class="dropdown is-hoverable is-right">
+  <div class="dropdown-trigger">
+    <button class="menu-list" aria-haspopup="true" aria-controls="dropdown-menu">
+      <span>Bebidas</span>
+      <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+    <div class="dropdown-content">
+      <a href="#" class="dropdown-item"> Dropdown item </a>
+      <a class="dropdown-item"> Other dropdown item </a>
+      <a href="#" class="dropdown-item is-active"> Active dropdown item </a>
+      <a href="#" class="dropdown-item"> Other dropdown item </a>
+      <hr class="dropdown-divider" />
+      <a href="#" class="dropdown-item"> With a divider </a>
+    </div>
+  </div>
+</div>
+              </li>
+              <li>
+                <div class="dropdown is-hoverable is-right">
+  <div class="dropdown-trigger">
+    <button class="menu-list" aria-haspopup="true" aria-controls="dropdown-menu">
+      <span>Congelados</span>
+      <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+    <div class="dropdown-content">
+      <a href="#" class="dropdown-item"> Dropdown item </a>
+      <a class="dropdown-item"> Other dropdown item </a>
+      <a href="#" class="dropdown-item is-active"> Active dropdown item </a>
+      <a href="#" class="dropdown-item"> Other dropdown item </a>
+      <hr class="dropdown-divider" />
+      <a href="#" class="dropdown-item"> With a divider </a>
+    </div>
+  </div>
+</div>
+              </li>
+                <li>
+                <div class="dropdown is-hoverable is-right">
+  <div class="dropdown-trigger">
+    <button class="menu-list" aria-haspopup="true" aria-controls="dropdown-menu">
+      <span>Limpieza</span>
+      <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+    <div class="dropdown-content">
+      <a href="#" class="dropdown-item"> Dropdown item </a>
+      <a class="dropdown-item"> Other dropdown item </a>
+      <a href="#" class="dropdown-item is-active"> Active dropdown item </a>
+      <a href="#" class="dropdown-item"> Other dropdown item </a>
+      <hr class="dropdown-divider" />
+      <a href="#" class="dropdown-item"> With a divider </a>
+    </div>
+  </div>
+</div>
+              </li>
+              <li>
+                <div class="dropdown is-hoverable is-right">
+  <div class="dropdown-trigger">
+    <button class="menu-list" aria-haspopup="true" aria-controls="dropdown-menu">
+      <span>Carnes</span>
+      <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+    <div class="dropdown-content">
+      <a href="#" class="dropdown-item"> Dropdown item </a>
+      <a class="dropdown-item"> Other dropdown item </a>
+      <a href="#" class="dropdown-item is-active"> Active dropdown item </a>
+      <a href="#" class="dropdown-item"> Other dropdown item </a>
+      <hr class="dropdown-divider" />
+      <a href="#" class="dropdown-item"> With a divider </a>
+    </div>
+  </div>
+</div>
+              </li>
+            </ul>
+
+            <p class="menu-label mt-4">Ofertas</p>
+            <ul class="menu-list">
+              <li>
+                <a href="#">
+                  Hasta 30% DTO
+                  <span class="tag is-light dm-filter-count">31</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  Hasta 40% DTO
+                  <span class="tag is-light dm-filter-count">5</span>
+                </a>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+
+      
+      <div class="column is-9">
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer has-background-light">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-3">
+            <p class="title is-6 mb-3">Dreammarket</p>
+            <p class="is-size-7">
+              Tu supermercado online: frescos, almacén, limpieza y más, con
+              entrega rápida y segura.
+            </p>
+          </div>
+          <div class="column is-3">
+            <p class="title is-6 mb-3">Ayuda</p>
+            <ul class="is-size-7">
+              <li><a href="/envios.html">Envíos y horarios</a></li>
+              <li><a href="/devoluciones.html">Devoluciones</a></li>
+              <li>
+                <a href="/preguntas-frecuentes.html">Preguntas frecuentes</a>
+              </li>
+              <li><a href="/contacto.html">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="column is-3">
+            <p class="title is-6 mb-3">Medios de pago</p>
+            <ul class="is-size-7">
+              <li>Tarjetas de crédito y débito</li>
+              <li>Transferencia / depósito</li>
+              <li>Mercado Pago</li>
+            </ul>
+          </div>
+          <div class="column is-3">
+            <p class="title is-6 mb-3">Contacto</p>
+            <p class="is-size-7">
+              WhatsApp:
+              <a href="https://wa.me/5491112345678">+54 9 11 1234-5678</a><br />
+              Email:
+              <a href="mailto:hola@dreammarket.com">hola@dreammarket.com</a>
+            </p>
+
+            <p class="title is-6 mb-2 mt-4">Seguinos</p>
+            <div class="buttons">
+              <a class="button is-small is-light" href="#" target="_blank"
+                >Instagram</a
+              >
+              <a class="button is-small is-light" href="#" target="_blank"
+                >Facebook</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="has-text-centered is-size-7 mt-5">
+          © 2025 Dreammarket · Todos los derechos reservados
+        </div>
+      </div>
+    </footer>
+</body>
+</html>
