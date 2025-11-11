@@ -103,20 +103,36 @@
     </div>
   </nav>
 
+  <div class="container">
+    <div class="has-text-centered">
+      <div class="field has-addons is-justify-content-center" style="max-width: 400px; margin: 0 auto;">
+        <div class="control is-expanded">
+          <input class="input" type="text" placeholder="Buscar productos...">
+        </div>
+        <div class="control">
+          <button class="button is-primary">
+            Buscar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <section class="section">
     <div class="container">
       <div class="columns">
-        <div class="column is-3">
+        <div class="column is-3" style="margin-left: -200px; margin-right: 30px;">
           <div class="box dm-filter">
+            <h1 class="subtitle" style="color: #1976D2;">FILTRAR POR:</h1>
             <aside class="menu">
               <p class="menu-label">Categoría</p>
               <ul class="menu-list">
                 <li>
                   <div class="dropdown is-hoverable is-right">
                     <div class="dropdown-trigger">
-                      <button class="menu-list">Almacén</button>
+                      <button class="menu-list menu-productos">Almacén</button>
                     </div>
-                    <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-menu menu-productos" role="menu">
                       <div class="dropdown-content">
                         <a class="dropdown-item"> Golosinas </a>
                         <a class="dropdown-item"> Snacks </a>
@@ -133,9 +149,9 @@
                 <li>
                   <div class="dropdown is-hoverable is-right">
                     <div class="dropdown-trigger">
-                      <button class="menu-list">Bebidas</button>
+                      <button class="menu-list menu-productos">Bebidas</button>
                     </div>
-                    <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-menu menu-productos" role="menu">
                       <div class="dropdown-content">
                         <a class="dropdown-item"> Bebidas sin alcohol </a>
                         <a class="dropdown-item"> Bebidas alcohólicas </a>
@@ -147,9 +163,9 @@
                 <li>
                   <div class="dropdown is-hoverable is-right">
                     <div class="dropdown-trigger">
-                      <button class="menu-list">Congelados</button>
+                      <button class="menu-list menu-productos">Congelados</button>
                     </div>
-                    <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-menu menu-productos" role="menu">
                       <div class="dropdown-content">
                         <a class="dropdown-item"> Verduras congeladas </a>
                         <a class="dropdown-item"> Hamburguesas </a>
@@ -163,9 +179,9 @@
                 <li>
                   <div class="dropdown is-hoverable is-right">
                     <div class="dropdown-trigger">
-                      <button class="menu-list">Limpieza</button>
+                      <button class="menu-list menu-productos">Limpieza</button>
                     </div>
-                    <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-menu menu-productos" role="menu">
                       <div class="dropdown-content">
                         <a class="dropdown-item"> Detergentes </a>
                         <a class="dropdown-item"> Lavandina </a>
@@ -179,9 +195,9 @@
                 <li>
                   <div class="dropdown is-hoverable is-right">
                     <div class="dropdown-trigger">
-                      <button class="menu-list">Carnes</button>
+                      <button class="menu-list menu-productos">Carnes</button>
                     </div>
-                    <div class="dropdown-menu" role="menu">
+                    <div class="dropdown-menu menu-productos" role="menu">
                       <div class="dropdown-content">
                         <a class="dropdown-item"> Carne vacuna </a>
                         <a class="dropdown-item"> Cerdo </a>
@@ -197,23 +213,175 @@
               <p class="menu-label mt-4">Ofertas</p>
               <ul class="menu-list">
                 <li>
-                  <a href="#">
-                    Hasta 30% OFF
-                    <span class="tag dm-filter-count">31</span>
-                  </a>
+                  <a href="#">10% OFF</a>
                 </li>
                 <li>
-                  <a href="#">
-                    Hasta 40% OFF
-                    <span class="tag dm-filter-count">5</span>
-                  </a>
+                  <a href="#">20% OFF</a>
+                </li>
+                <li>
+                  <a href="#">30% OFF</a>
+                </li>
+                <li>
+                  <a href="#">40% OFF</a>
+                </li>
+                <li>
+                  <a href="#">50% OFF</a>
+                </li>
+                <li>
+                  <a href="#">Dreamweek!</a>
+                </li>
+                <li>
+                  <a href="#">2x1</a>
+                </li>
+                <li>
+                  <a href="#">3x2</a>
                 </li>
               </ul>
             </aside>
           </div>
         </div>
+
+        <div class="column is-9">
+          <div class="columns is-multiline is-centered">
+
+            <div class="column is-one-quarter">
+              <div class="card pag-productos">
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="./imagenes/lecheentera.jpeg">
+                  </figure>
+                </div>
+                <div class="card-content has-text-centered">
+                  <p class="title is-6">DetergenteLimon Magistral 500ml.</p>
+                  <p class="subtitle is-6">
+                    <s>$4.200</s> <strong>$.2520</strong><br>
+                    <span class="tag is-danger is-light" style="margin-top: 5px">40% OFF</span>
+                  </p>
+                  <button class="button is-danger is-small">Agregar</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="card pag-productos">
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="./imagenes/yogurtdurazno.jpeg">
+                  </figure>
+                </div>
+                <div class="card-content has-text-centered">
+                  <p class="title is-6">Hamburguesas Paty 20u.</p>
+                  <p class="subtitle is-6">
+                    <s>$18.500</s> <strong>$12.950</strong><br>
+                    <span class="tag dreamweek-tag">Dreamweek</span>
+                    <span class="tag is-danger is-light" style="margin-top: 5px">30% OFF</span>
+                  </p>
+                  <button class="button is-danger is-small">Agregar</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="card pag-productos">
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="./imagenes/manteca.jpeg">
+                  </figure>
+                </div>
+                <div class="card-content has-text-centered">
+                  <p class="title is-6">Manteca Ilolay 200g</p>
+                  <p class="subtitle is-6">
+                    <s>$3.900</s> <strong>$3.510</strong><br>
+                    <span class="tag is-danger is-light" style="margin-top: 5px">10% OFF</span>
+                  </p>
+                  <button class="button is-danger is-small">Agregar</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="card pag-productos">
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="./imagenes/manteca.jpeg">
+                  </figure>
+                </div>
+                <div class="card-content has-text-centered">
+                  <p class="title is-6">Alfajor blanco Jorgito 50g.</p>
+                  <p class="subtitle is-6">
+                    <s>$1.000</s> <strong>$800</strong><br>
+                    <span class="tag is-danger is-light" style="margin-top: 5px">20% OFF</span>
+                  </p>
+                  <button class="button is-danger is-small">Agregar</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="card pag-productos">
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="./imagenes/manteca.jpeg">
+                  </figure>
+                </div>
+                <div class="card-content has-text-centered">
+                  <p class="title is-6">Papas fritas Lays 122g.</p>
+                  <p class="subtitle is-6">
+                    <strong>$4.725</strong>
+                  </p>
+                  <button class="button is-danger is-small">Agregar</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="card pag-productos">
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="./imagenes/manteca.jpeg">
+                  </figure>
+                </div>
+                <div class="card-content has-text-centered">
+                  <p class="title is-6">Cerveza Ipa Patagonia 730cc.</p>
+                  <p class="subtitle is-6">
+                    <s>$5.800</s> <strong>$3.840</strong><br>
+                    <span class="tag dreamweek-tag">Dreamweek</span>
+                    <span class="tag is-danger is-light" style="margin-top: 5px">40% OFF</span>
+                  </p>
+                  <button class="button is-danger is-small">Agregar</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="card pag-productos">
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="./imagenes/manteca.jpeg">
+                  </figure>
+                </div>
+                <div class="card-content has-text-centered">
+                  <p class="title is-6">Yerba Mate Rosamonte 500g.</p>
+                  <p class="subtitle is-6">
+                    <s>$7.200</s> <strong>$5.760</strong><br>
+                    <span class="tag is-danger is-light" style="margin-top: 5px">20% OFF</span>
+                  </p>
+                  <button class="button is-danger is-small">Agregar</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="column is-3" style="margin-left: 40px;">
+            <figure class="image">
+              <img src="./imagenes/banner_vertical.jpg">
+            </figure>
+        </div>
+
       </div>
-    </div>
+
     </div>
   </section>
 
