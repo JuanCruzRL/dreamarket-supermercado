@@ -47,3 +47,15 @@
   background-color: rgb(68, 1, 131); 
   color: white
 }
+
+.menu-list.menu-productos {
+  width: 280px;
+}
+
+.dropdown-menu.menu-productos {
+  margin-left: 2px !important;
+}
+
+.card.pag-productos {
+  min-height: 380px;
+}
