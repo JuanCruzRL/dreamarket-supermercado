@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    />
+    <title>Dreamarket Admin</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <a class="navbar-item">
+          <span class="is-size-5 has-text-weight-bold">DREAMARKET ADMIN</span>
+        </a>
+      </div>
+
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item">Gestión de Productos</a>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary" href="./index.html">
+                <strong>Inicio 🏠</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section class="section">
+      <div class="container">
+        <h1 class="title is-2">Gestión de Productos</h1>
+        <div class="level">
+          <div class="level-left">
+            <p class="subtitle is-5">Listado de productos activos</p>
+          </div>
+          <div class="level-right">
+            <button
+              class="button is-success"
+            >
+              ➕ Crear Nuevo Producto
+            </button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Marca</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Categoría</th>
+                <th class="has-text-centered">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1001</td>
+                <td>Aceite de Girasol x 1L</td>
+                <td>Natura</td>
+                <td>$1.250,00</td>
+                <td>50</td>
+                <td>Aceites y condimentos</td>
+                <td class="has-text-centered">
+                  <button class="button is-small is-info mr-2">
+                    Editar ✏️
+                  </button>
+                  <button class="button is-small is-danger">Eliminar 🗑️</button>
+                </td>
+              </tr>
+              <tr>
+                <td>1002</td>
+                <td>Galletas</td>
+                <td>Don Satur</td>
+                <td>$780,00</td>
+                <td>120</td>
+                <td>Galletitas</td>
+                <td class="has-text-centered">
+                  <button class="button is-small is-info mr-2">
+                    Editar ✏️
+                  </button>
+                  <button class="button is-small is-danger">Eliminar 🗑️</button>
+                </td>
+              </tr>
+              <tr>
+                <td>1003</td>
+                <td>Leche Entera x 1L</td>
+                <td>Casanto</td>
+                <td>$950,00</td>
+                <td>80</td>
+                <td>Lácteos</td>
+                <td class="has-text-centered">
+                  <button class="button is-small is-info mr-2">
+                    Editar ✏️
+                  </button>
+                  <button class="button is-small is-danger">Eliminar 🗑️</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
