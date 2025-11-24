@@ -1,12 +1,4 @@
-import { Pool } from 'pg'
- 
-const db = new Pool({
-  user: 'postgres',
-  password: 'password',
-  host: 'localhost',
-  port: 5433,
-  database: 'dreamarket_db',
-})
+import db from "./db.js";
 
 export async function get_all_users() {
     const response = await db.query("SELECT * FROM usuarios");
