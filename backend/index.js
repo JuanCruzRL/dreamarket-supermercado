@@ -2,7 +2,7 @@ import express from 'express'
 import usuarios from "./src/api_usuarios.js"
 
 const app = express()
-const port = 3050
+const port = 3000
 
 app.use(express.json());
 

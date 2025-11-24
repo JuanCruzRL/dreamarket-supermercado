@@ -1,32 +1,30 @@
 import db from "./db.js";
 
 export async function get_all_users() {
-    const response = await db.query("SELECT * FROM usuarios");
-    return response.rows;
+  const response = await db.query("SELECT * FROM usuarios");
+  return response.rows;
 }
 
-export async function get_user (id_usuario) {
-    const response = await db.query("SELECT * FROM usuarios WHERE id_usuario = $1", [id_usuario]);
-    if (response.rowCount === 0){
-        return undefined;
-    }
-    return response.rows[0];
+export async function get_user(id_usuario) {
+  const response = await db.query("SELECT * FROM usuarios WHERE id_usuario = $1", [id_usuario]);
+  if (response.rowCount === 0) {
+    return undefined;
+  }
+  return response.rows[0];
 }
 
 export async function update_user(email, nombre, apellido, telefono, direccion, id_usuario) {
-    await db.query("UPDATE usuarios SET email = $1, nombre = $2, apellido = $3, telefono = $4, direccion = $5 WHERE id_usuario = $6", [email, nombre, apellido, telefono, direccion, id_usuario])
-    return {
-        id_usuario,
-        email,
-        nombre,
-        apellido,
-        telefono,
-        direccion,
-    }
+  const response = await db.query(
+    `UPDATE usuarios SET email = $1, nombre = $2, apellido = $3, telefono = $4, direccion = $5
+       WHERE id_usuario = $6
+       RETURNING id_usuario, email, nombre, apellido, telefono, direccion`,
+    [email, nombre, apellido, telefono, direccion, id_usuario]
+  )
+  return response.rows[0];
 }
 
 export async function delete_user(id_usuario) {
-    await db.query("DELETE FROM usuarios WHERE id_usuario = $1", [id_usuario]);
+  await db.query("DELETE FROM usuarios WHERE id_usuario = $1", [id_usuario]);
 }
 
 export async function create_user(email, nombre, apellido, telefono, direccion) {
