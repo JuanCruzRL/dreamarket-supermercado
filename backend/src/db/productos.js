@@ -13,13 +13,13 @@ export async function get_product(id_producto) {
     return response.rows[0];
 }
 
-export async function create_product(nombre, marca, precio, stock, categoria) {
+export async function create_product(nombre, marca, precio, stock, categoria, imagen, descuento) {
   try {
     const result = await db.query(
-      `INSERT INTO productos (nombre, marca, precio, stock, categoria)
-       VALUES ($1, $2, $3, $4, $5)
-       RETURNING id_producto, nombre, marca, precio, stock, categoria`,
-      [nombre, marca, precio, stock, categoria]
+      `INSERT INTO productos (nombre, marca, precio, stock, categoria, imagen, descuento)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)
+       RETURNING id_producto, nombre, marca, precio, stock, categoria, imagen, descuento`,
+      [nombre, marca, precio, stock, categoria, imagen, descuento]
     );
     return result.rows[0];
   } catch {
@@ -27,12 +27,12 @@ export async function create_product(nombre, marca, precio, stock, categoria) {
   }
 }
 
-export async function update_product(id_producto, nombre, marca, precio, stock, categoria) {
+export async function update_product(id_producto, nombre, marca, precio, stock, categoria, imagen, descuento) {
     const response = await db.query(
-        `UPDATE productos SET  nombre = $2, marca = $3, precio = $4, stock = $5, categoria = $6
+        `UPDATE productos SET  nombre = $2, marca = $3, precio = $4, stock = $5, categoria = $6, imagen = $7, descuento = $8
         WHERE id_producto = $1
-        RETURNING id_producto, nombre, marca, precio, stock, categoria`,
-        [id_producto, nombre, marca, precio, stock, categoria]
+        RETURNING id_producto, nombre, marca, precio, stock, categoria, imagen, descuento`,
+        [id_producto, nombre, marca, precio, stock, categoria, imagen, descuento]
     )
     return response.rows[0];
 }
