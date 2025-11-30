@@ -45,7 +45,7 @@
         <div class="columns is-centered">
           <div class="column is-half">
             <div class="box">
-              <h2 class="title is-4" id="btn-login">Ingresar</h2>
+              <h2 class="title is-4">Ingresar</h2>
 
               <div class="field">
                 <label class="label">E-mail</label>
@@ -160,12 +160,57 @@
       </div>
     </footer>
     <script>
-      const btnLogin = document.getElementById("btn-login");
+      const API_LOGIN = "http://localhost:3000/usuarios/login";
 
-      btnLogin.addEventListener("click", () => {
-        localStorage.setItem("usuarioLogueado", "true");
-        window.location.href = "index.html";
+      const btnLogin = document.getElementById("btn-login");
+      const inputEmail = document.getElementById("login-email");
+      const inputContrasenia = document.getElementById("login-contrasenia");
+
+      btnLogin.addEventListener("click", async () => {
+        const email = inputEmail.value.trim();
+        const contrasenia = inputContrasenia.value;
+
+        if (email === "") {
+          alert("Ingresá tu email.");
+          return;
+        }
+        if (contrasenia === "") {
+          alert("Ingresá tu contraseña.");
+          return;
+        }
+
+        try {
+          const response = await fetch(API_LOGIN, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: email,
+              contrasenia: contrasenia
+            })
+          });
+
+          if (response.status === 401) {
+            alert("Email o contraseña incorrectos.");
+            return;
+          }
+
+          if (!response.ok) {
+            alert("Error al iniciar sesión (status " + response.status + ")");
+            return;
+          }
+
+          const usuario = await response.json();
+
+          localStorage.setItem("usuarioLogueado", "true");
+          localStorage.setItem("usuarioId", usuario.id_usuario);
+          localStorage.setItem("usuarioNombre", usuario.nombre);
+
+          window.location.href = "index.html";
+        } catch (error) {
+          console.error("Error en login:", error);
+          alert("Error inesperado al iniciar sesión.");
+        }
       });
     </script>
-  </body>
+</body>
 </html>
