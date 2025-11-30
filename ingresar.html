@@ -38,63 +38,6 @@
           <span aria-hidden="true"></span>
         </a>
       </div>
-
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item" href="./descuentos.html"> Descuentos </a>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link"> Almacen </a>
-            <div class="navbar-dropdown">
-              <a class="navbar-item">Golosinas</a>
-              <a class="navbar-item">Panadería</a>
-              <a class="navbar-item">Snacks</a>
-              <a class="navbar-item">Aceites y condimentos</a>
-              <a class="navbar-item">Mermeladas y dulces</a>
-              <a class="navbar-item">Galletitas</a>
-              <a class="navbar-item">Conservas y enlatados</a>
-              <a class="navbar-item">Harinas y pastas</a>
-            </div>
-          </div>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link"> Bebidas </a>
-            <div class="navbar-dropdown">
-              <a class="navbar-item">Bebidas sin alcohol</a>
-              <a class="navbar-item">Bebidas alcohólicas</a>
-              <a class="navbar-item">Infusiones</a>
-            </div>
-          </div>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link"> Congelados </a>
-            <div class="navbar-dropdown">
-              <a class="navbar-item">Verduras congeladas</a>
-              <a class="navbar-item">Papas fritas</a>
-              <a class="navbar-item">Hamburguesas</a>
-              <a class="navbar-item">Helados</a>
-              <a class="navbar-item">Frutas congeladas</a>
-            </div>
-          </div>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link"> Limpieza </a>
-            <div class="navbar-dropdown">
-              <a class="navbar-item">Detergentes</a>
-              <a class="navbar-item">Desinfectantes</a>
-              <a class="navbar-item">Lavandina</a>
-              <a class="navbar-item">Suavizantes</a>
-              <a class="navbar-item">Escobas y trapos</a>
-            </div>
-          </div>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link"> Carnes </a>
-            <div class="navbar-dropdown">
-              <a class="navbar-item">Carne vacuna</a>
-              <a class="navbar-item">Pollo</a>
-              <a class="navbar-item">Cerdo</a>
-              <a class="navbar-item">Pescado</a>
-              <a class="navbar-item">Embutidos</a>
-            </div>
-          </div>
-        </div>
-      </div>
     </nav>
     <br />
     <section class="section">
@@ -102,7 +45,7 @@
         <div class="columns is-centered">
           <div class="column is-half">
             <div class="box">
-              <h2 class="title is-4">Ingresar</h2>
+              <h2 class="title is-4" id="btn-login">Ingresar</h2>
 
               <div class="field">
                 <label class="label">E-mail</label>
@@ -216,5 +159,13 @@
         </div>
       </div>
     </footer>
+    <script>
+      const btnLogin = document.getElementById("btn-login");
+
+      btnLogin.addEventListener("click", () => {
+        localStorage.setItem("usuarioLogueado", "true");
+        window.location.href = "index.html";
+      });
+    </script>
   </body>
 </html>
