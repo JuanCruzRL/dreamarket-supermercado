@@ -18,9 +18,7 @@
       </div>
 
       <div class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item">Gestión de Productos</a>
-        </div>
+        
 
         <div class="navbar-end">
           <div class="navbar-item">
@@ -42,10 +40,9 @@
             <p class="subtitle is-5">Listado de productos activos</p>
           </div>
           <div class="level-right">
-            <button
-              class="button is-success"
-            >
-              ➕ Crear Nuevo Producto
+            <button id="btn-nuevo-producto" class="button is-primary dm-btn">
+              <span style="font-size: 25px; margin-right: 10px">+</span>
+              Crear Nuevo Producto
             </button>
           </div>
         </div>
@@ -60,56 +57,155 @@
                 <th>Precio</th>
                 <th>Stock</th>
                 <th>Categoría</th>
+                <th>Descuentos</th>
+                <th>Imagen</th>
                 <th class="has-text-centered">Acciones</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>1001</td>
-                <td>Aceite de Girasol x 1L</td>
-                <td>Natura</td>
-                <td>$1.250,00</td>
-                <td>50</td>
-                <td>Aceites y condimentos</td>
-                <td class="has-text-centered">
-                  <button class="button is-small is-info mr-2">
-                    Editar ✏️
-                  </button>
-                  <button class="button is-small is-danger">Eliminar 🗑️</button>
-                </td>
-              </tr>
-              <tr>
-                <td>1002</td>
-                <td>Galletas</td>
-                <td>Don Satur</td>
-                <td>$780,00</td>
-                <td>120</td>
-                <td>Galletitas</td>
-                <td class="has-text-centered">
-                  <button class="button is-small is-info mr-2">
-                    Editar ✏️
-                  </button>
-                  <button class="button is-small is-danger">Eliminar 🗑️</button>
-                </td>
-              </tr>
-              <tr>
-                <td>1003</td>
-                <td>Leche Entera x 1L</td>
-                <td>Casanto</td>
-                <td>$950,00</td>
-                <td>80</td>
-                <td>Lácteos</td>
-                <td class="has-text-centered">
-                  <button class="button is-small is-info mr-2">
-                    Editar ✏️
-                  </button>
-                  <button class="button is-small is-danger">Eliminar 🗑️</button>
-                </td>
-              </tr>
+            <tbody id="tabla-productos">
             </tbody>
           </table>
         </div>
       </div>
     </section>
-  </body>
+    <script>
+      const api_url = "http://localhost:3000/productos";
+      function cargarProductos() {
+        fetch(api_url)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Productos desde la API:", data);
+          const tbody = document.getElementById("tabla-productos");
+          tbody.innerHTML = "";
+          data.forEach((producto) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${producto.id_producto}</td>
+              <td>${producto.nombre}</td>
+              <td>${producto.marca}</td>
+              <td>${producto.precio}</td>
+              <td>${producto.stock}</td>
+              <td>${producto.categoria}</td>
+              <td>${producto.descuento || "-"}</td>
+              <td>${producto.imagen ? `<img src="${producto.imagen}" alt="${producto.nombre}" style="max-width: 64px; max-height: 64px; object-fit: cover;">`: "-"}</td>
+              <td>
+                <button class="button is-small is-info mr-2" data-id="${producto.id_producto}" data-action="edit">
+                  Editar ✏️
+                </button>
+                <button class="button is-small is-danger" data-id="${producto.id_producto}" data-action="delete">
+                  Eliminar 🗑️
+                </button>
+              </td>
+              `;
+            tbody.appendChild(tr);
+          })
+        });
+      }
+      cargarProductos();
+      const tbody = document.getElementById("tabla-productos");
+
+      tbody.addEventListener("click", async (event) => {
+        const btn = event.target.closest("button");
+        if (!btn) return;
+
+        const id = btn.dataset.id;
+        const action = btn.dataset.action;
+        if (action == "delete"){
+          await fetch(`${api_url}/${id}`, { method: "DELETE" });
+          cargarProductos();
+        }
+        if (action === "edit") {
+          const resultado = await fetch(`${api_url}/${id}`);
+          const producto = await resultado.json();
+
+          const nuevoNombre = prompt("Nombre:", producto.nombre);
+          if (!nuevoNombre) return;
+
+          const nuevaMarca = prompt("Marca:", producto.marca);
+          if (!nuevaMarca) return;
+
+          const nuevoPrecio = prompt("Precio:", producto.precio);
+          if (!nuevoPrecio) return;
+
+          const nuevoStock = prompt("Stock:", producto.stock);
+          if (!nuevoStock) return;
+
+          const nuevaCategoria = prompt("Categoría:", producto.categoria);
+          if (!nuevaCategoria) return;
+
+          const nuevoDescuento =
+            prompt("Descuento:", producto.descuento || "-") || null;
+
+          const nuevaImagen =
+            prompt("URL imagen:", producto.imagen || "-") || null;
+
+          const body = {
+            nombre: nuevoNombre,
+            marca: nuevaMarca,
+            precio: nuevoPrecio,
+            stock: nuevoStock,
+            categoria: nuevaCategoria,
+            descuento: nuevoDescuento,
+            imagen: nuevaImagen,
+          };
+
+          await fetch(`${api_url}/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+
+          cargarProductos();
+        }
+      });
+      function crearProducto() {
+        const nombre = prompt("Nombre del producto:");
+        if (!nombre) return;
+
+        const marca = prompt("Marca:");
+        if (!marca) return;
+
+        const precio = prompt("Precio:");
+        if (!precio) return;
+
+        const stock = prompt("Stock:");
+        if (!stock) return;
+
+        const categoria = prompt("Categoría:");
+        if (!categoria) return;
+
+        const descuento =
+          prompt("Descuento (ej: '10% OFF' o vacío si no tiene):") || null;
+
+        const imagen =
+          prompt("URL de la imagen (opcional):") || null;
+
+        const body = {
+          nombre,
+          marca,
+          precio,
+          stock,
+          categoria,
+          descuento,
+          imagen,
+        };
+
+        fetch(api_url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        })
+        .then((res) => {
+          console.log("Respuesta POST /productos:", res.status);
+          return res.json();
+        })
+        .then((nuevo) => {
+          console.log("Producto creado:", nuevo);
+          cargarProductos();
+        })
+      }
+      const btnNuevo = document.getElementById("btn-nuevo-producto");
+      btnNuevo.addEventListener("click", crearProducto);
+  </script>
+</body>
 </html>
