@@ -14,7 +14,7 @@ CREATE TABLE productos (
   precio       NUMERIC(10,2) NOT NULL,
   stock        INT NOT NULL,
   categoria    VARCHAR(100),
-  imagen       URL,
+  imagen       TEXT,
   descuento    VARCHAR(50)
 );
 
