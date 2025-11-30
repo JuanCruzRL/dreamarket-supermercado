@@ -1,5 +1,5 @@
 import express from "express";
-import { get_all_users, create_user, get_user, delete_user, update_user } from "./db/usuarios.js";
+import { get_all_users, create_user, get_user, delete_user, update_user, get_user_by_email,} from "./db/usuarios.js";
 
 const router = express.Router();
 
@@ -36,6 +36,26 @@ router.post("/", async (req, res) => {
   }
   const usuario = await create_user(email, nombre, apellido, telefono, direccion);  
   return res.status(201).json(usuario);
+});
+
+router.post("/login", async (req, res) => {
+  if (req.body === undefined) {
+    return res.status(400).send("No body was provided");
+  }
+
+  const email = req.body.email;
+
+  if (email === undefined) {
+    return res.sendStatus(400);
+  }
+
+  const usuario = await get_user_by_email(email);
+
+  if (usuario === undefined) {
+    return res.sendStatus(401);
+  }
+
+  return res.status(200).json(usuario);
 });
 
 router.get("/:id", async (req, res) => {
