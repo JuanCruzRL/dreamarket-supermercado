@@ -17,6 +17,8 @@ router.post("/", async (req, res) => {
     const precio = req.body.precio;
     const stock = req.body.stock;
     const categoria = req.body.categoria;
+    const imagen = req.body.imagen;
+    const descuento = req.body.descuento;
 
     if (nombre === undefined) {
         return res.sendStatus(400)
@@ -33,7 +35,7 @@ router.post("/", async (req, res) => {
     if (categoria === undefined) {
         return res.sendStatus(400)
     }
-    const producto = await create_product(nombre, marca, precio, stock, categoria);
+    const producto = await create_product(nombre, marca, precio, stock, categoria, imagen, descuento);
     return res.status(201).json(producto);
 });
 
@@ -54,6 +56,8 @@ router.put("/:id", async (req, res) => {
     const precio = req.body.precio;
     const stock = req.body.stock;
     const categoria = req.body.categoria;
+    const imagen = req.body.imagen;
+    const descuento = req.body.descuento;
 
     if (nombre === undefined) {
         return res.sendStatus(400)
@@ -71,7 +75,7 @@ router.put("/:id", async (req, res) => {
         return res.sendStatus(400)
     }
 
-    const producto = await update_product(id_buscado, nombre, marca, precio, stock, categoria);
+    const producto = await update_product(id_buscado, nombre, marca, precio, stock, categoria, imagen, descuento);
 
     if (!producto) {
         return res.status(404).send("Product not found");
