@@ -52,12 +52,12 @@ export async function create_user(email, nombre, apellido, telefono, direccion, 
   }
 }
 
+
 export async function get_user_by_email(email) {
   const response = await db.query(
-    "SELECT id_usuario, email, nombre, apellido, telefono, direccion, contrasenia FROM usuarios WHERE email = $1",
+    "SELECT * FROM usuarios WHERE email = $1",
     [email]
   );
-
   if (response.rowCount === 0) {
     return undefined;
   }

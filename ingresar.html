@@ -51,6 +51,7 @@
                 <label class="label">E-mail</label>
                 <div class="control">
                   <input
+                    id="login-email"
                     class="input"
                     type="text"
                     placeholder="ej: usuario@gmail.com"
@@ -62,6 +63,7 @@
                 <label class="label">Contraseña</label>
                 <div class="control has-icons-right">
                   <input
+                    id="login-contrasenia"
                     class="input"
                     type="password"
                     placeholder="***********"
@@ -71,7 +73,9 @@
               </div>
 
               <button
+                id="btn-ingresar"
                 class="button is-primary dm-btn is-fullwidth"
+                type="button"
               >
                 Ingresar
               </button>
@@ -86,6 +90,7 @@
                 <label class="label">Correo Electrónico</label>
                 <div class="control">
                   <input
+                    id="registro-email"
                     class="input"
                     type="email"
                     placeholder="ej: usuario@gmail.com"
@@ -93,12 +98,13 @@
                 </div>
               </div>
 
-              <a
+              <button
+                id="btn-ir-a-registro"
                 class="button is-primary dm-btn is-fullwidth"
-                href="./registro.html"
+                type="button"
               >
                 Crear mi cuenta
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -160,57 +166,57 @@
       </div>
     </footer>
     <script>
-      const API_LOGIN = "http://localhost:3000/usuarios/login";
+      const btnIngresar = document.getElementById("btn-ingresar");
+      const loginEmail = document.getElementById("login-email");
+      const loginContrasenia = document.getElementById("login-contrasenia");
 
-      const btnLogin = document.getElementById("btn-login");
-      const inputEmail = document.getElementById("login-email");
-      const inputContrasenia = document.getElementById("login-contrasenia");
+      const registroEmail = document.getElementById("registro-email");
+      const btnIrARegistro = document.getElementById("btn-ir-a-registro");
 
-      btnLogin.addEventListener("click", async () => {
-        const email = inputEmail.value.trim();
-        const contrasenia = inputContrasenia.value;
+      btnIngresar.addEventListener("click", async () => {
+        const email = loginEmail.value.trim();
+        const contrasenia = loginContrasenia.value.trim();
 
-        if (email === "") {
-          alert("Ingresá tu email.");
-          return;
-        }
-        if (contrasenia === "") {
-          alert("Ingresá tu contraseña.");
+        if (!email || !contrasenia) {
+          alert("Completá email y contraseña.");
           return;
         }
 
         try {
-          const response = await fetch(API_LOGIN, {
+          const respuesta = await fetch("http://localhost:3000/usuarios/login", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: email,
-              contrasenia: contrasenia
-            })
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, contrasenia }),
           });
 
-          if (response.status === 401) {
+          if (!respuesta.ok) {
             alert("Email o contraseña incorrectos.");
             return;
           }
 
-          if (!response.ok) {
-            alert("Error al iniciar sesión (status " + response.status + ")");
-            return;
-          }
+          const usuario = await respuesta.json();
 
-          const usuario = await response.json();
-
-          localStorage.setItem("usuarioLogueado", "true");
-          localStorage.setItem("usuarioId", usuario.id_usuario);
-          localStorage.setItem("usuarioNombre", usuario.nombre);
-
+          localStorage.setItem("usuarioLogueado", JSON.stringify(usuario));
           window.location.href = "index.html";
         } catch (error) {
-          console.error("Error en login:", error);
-          alert("Error inesperado al iniciar sesión.");
+          console.error(error);
+          alert("Ocurrió un error al ingresar.");
         }
       });
+
+      btnIrARegistro.addEventListener("click", () => {
+        const email = registroEmail.value.trim();
+
+        if (!email) {
+          alert("Ingresá un correo electrónico para registrarte.");
+          return;
+        }
+
+        localStorage.setItem("emailRegistro", email);
+        window.location.href = "registro.html";
+      });
     </script>
-</body>
+  </body>
 </html>

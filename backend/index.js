@@ -18,7 +18,6 @@ app.use("/usuarios", usuarios);
 app.use("/productos", productos);
 app.use("/pedidos", pedidos);
 
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
