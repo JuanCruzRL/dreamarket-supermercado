@@ -161,7 +161,7 @@
 
         <div class="field">
           <div class="control">
-            <button class="button dm-btn is-primary is-fullwidth">
+            <button class="button dm-btn is-primary is-fullwidth" id="btn-registrarme">
               Registrarme
             </button>
           </div>
@@ -220,5 +220,13 @@
         </div>
       </div>
     </footer>
+    <script>
+      const btnRegistrarme = document.getElementById("btn-registrarme");
+
+      btnRegistrarme.addEventListener("click", () => {
+        localStorage.setItem("usuarioLogueado", "true");
+        window.location.href = "index.html";
+      });
+    </script>
   </body>
 </html>
