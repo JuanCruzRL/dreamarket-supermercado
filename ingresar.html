@@ -73,6 +73,7 @@
               </div>
 
               <button
+                onclick="ingresar()"
                 id="btn-ingresar"
                 class="button is-primary dm-btn is-fullwidth"
                 type="button"
@@ -99,6 +100,7 @@
               </div>
 
               <button
+                onclick="ir_a_registro()"
                 id="btn-ir-a-registro"
                 class="button is-primary dm-btn is-fullwidth"
                 type="button"
@@ -166,7 +168,60 @@
       </div>
     </footer>
     <script>
-      
+      const baseApiUrl = "http://localhost:3000/usuarios";
+      const loginEmailInput = document.getElementById("login-email");
+      const loginContraseniaInput = document.getElementById("login-contrasenia");
+      const registroEmailInput = document.getElementById("registro-email");
+      const botonIngresar = document.getElementById("btn-ingresar");
+      const botonIrARegistro = document.getElementById("btn-ir-a-registro");
+
+      async function ingresar() {
+        const email = loginEmailInput.value.trim();
+        const contrasenia = loginContraseniaInput.value;
+
+        if (email === "" || contrasenia === "") {
+          alert("Completá email y contraseña para ingresar.");
+          return;
+        }
+
+        const response = await fetch(baseApiUrl + "/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            contrasenia: contrasenia,
+          }),
+        });
+
+        if (response.status === 200) {
+          const usuario = await response.json();
+          
+          localStorage.setItem("usuario_actual", JSON.stringify(usuario));
+          
+          window.location.href = "index.html";
+          return;
+        }
+
+        if (response.status === 401) {
+          alert("Email o contraseña incorrectos.");
+          return;
+        }
+      };
+        
+      async function ir_a_registro() {
+        const emailRegistro = registroEmailInput.value.trim();
+
+        if (emailRegistro === "") {
+          alert("Ingresá un correo electrónico para crear la cuenta.");
+          return;
+        }
+
+        localStorage.setItem("email_para_registro", emailRegistro);
+
+        window.location.href = "registro.html";
+      };
     </script>
   </body>
 </html>
