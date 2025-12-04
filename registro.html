@@ -47,60 +47,48 @@
         <div class="field">
           <label class="label">Nombre</label>
           <div class="control">
-            <input class="input" type="text" placeholder="Ingresa tu nombre" />
+            <input id="registro-nombre" class="input" type="text" placeholder="Ingresa tu nombre" />
           </div>
         </div>
 
         <div class="field">
           <label class="label">Apellido</label>
           <div class="control">
-            <input
-              class="input"
-              type="text"
-              placeholder="Ingresa tu apellido"
-            />
+            <input id="registro-apellido" class="input" type="text" placeholder="Ingresa tu apellido" />
           </div>
         </div>
 
         <div class="field">
           <label class="label">Teléfono</label>
           <div class="control">
-            <input class="input" type="text" placeholder="Ej: 11 2345 6789" />
+            <input id="registro-telefono" class="input" type="text" placeholder="Ej: 11 2345 6789" />
           </div>
         </div>
 
         <div class="field">
           <label class="label">Dirección</label>
           <div class="control">
-            <input
-              class="input"
-              type="text"
-              placeholder="Ingresa tu dirección"
-            />
+            <input id="registro-direccion" class="input" type="text" placeholder="Ingresa tu dirección" />
           </div>
         </div>
 
         <div class="field">
           <label class="label">Contraseña</label>
           <div class="control">
-            <input class="input" type="password" placeholder="Ingresa una contraseña" />
+            <input id="registro-contrasenia" class="input" type="password" placeholder="Ingresa una contraseña" />
           </div>
         </div>
 
         <div class="field">
           <label class="label">Confirmar contraseña</label>
           <div class="control">
-            <input
-              class="input"
-              type="password"
-              placeholder="Repite la contraseña"
-            />
+            <input id="registro-confirmar-contrasenia" class="input" type="password" placeholder="Repite la contraseña" />
           </div>
         </div>
 
         <div class="field">
           <div class="control">
-            <button class="button dm-btn is-primary is-fullwidth" id="btn-registrarme">
+            <button onclick="registrar_usuario()" class="button dm-btn is-primary is-fullwidth" id="btn-registrarme">
               Registrarme
             </button>
           </div>
@@ -108,59 +96,81 @@
       </div>
     </div>
 
-    <footer class="footer">
-      <div class="container">
-        <div class="columns">
-          <div class="column is-3">
-            <p class="title is-6 mb-3">Dreammarket</p>
-            <p class="is-size-7">
-              Tu supermercado online: frescos, almacén, limpieza y más, con entrega rápida y segura.
-            </p>
-          </div>
-
-          <div class="column is-3">
-            <p class="title is-6 mb-3">Ayuda</p>
-            <ul class="is-size-7">
-              <li><a href="/envios.html">Envíos y horarios</a></li>
-              <li><a href="/devoluciones.html">Devoluciones</a></li>
-              <li><a href="/preguntas-frecuentes.html">Preguntas frecuentes</a></li>
-              <li><a href="/contacto.html">Contacto</a></li>
-            </ul>
-          </div>
-
-          <div class="column is-3">
-            <p class="title is-6 mb-3">Medios de pago</p>
-            <ul class="is-size-7">
-              <li>Tarjetas de crédito y débito</li>
-              <li>Transferencia / depósito</li>
-              <li>Mercado Pago</li>
-            </ul>
-          </div>
-
-          <div class="column is-3">
-            <p class="title is-6 mb-3">Contacto</p>
-            <p class="is-size-7">
-              WhatsApp:
-              <a href="https://wa.me/5491112345678">+54 9 11 1234-5678</a><br />
-              Email:
-              <a href="mailto:hola@dreammarket.com">hola@dreammarket.com</a>
-            </p>
-
-            <p class="title is-6 mb-2 mt-4">Seguinos</p>
-            <div class="buttons">
-              <a class="button is-small is-light" href="#" target="_blank">Instagram</a>
-              <a class="button is-small is-light" href="#" target="_blank">Facebook</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="has-text-centered is-size-7 mt-5">
-          © 2025 Dreammarket · Todos los derechos reservados
-        </div>
-      </div>
-    </footer>
+    <div id="footer-placeholder"></div>
     <script>
-      
+        async function cargarFooter() {
+          const respuesta = await fetch("./footer.html");
+          const html = await respuesta.text();
+          document.getElementById("footer-placeholder").innerHTML = html;
+        }
+        cargarFooter();
+        const baseApiUrl = "http://localhost:3000/usuarios";
+
+        async function registrar_usuario () {
+          const nombreInput = document.getElementById("registro-nombre");
+          const apellidoInput = document.getElementById("registro-apellido");
+          const telefonoInput = document.getElementById("registro-telefono");
+          const direccionInput = document.getElementById("registro-direccion");
+          const contraseniaInput = document.getElementById("registro-contrasenia");
+          const confirmarContraseniaInput = document.getElementById("registro-confirmar-contrasenia");
+          const botonRegistrarme = document.getElementById("btn-registrarme");
+
+          const emailParaRegistro = localStorage.getItem("email_para_registro");
+
+          if (!emailParaRegistro) {
+            alert("No se encontró el email de registro. Volvé a la página de ingreso.");
+            window.location.href = "ingresar.html";
+            return;
+          }
+
+          const nombre = nombreInput.value.trim();
+          const apellido = apellidoInput.value.trim();
+          const telefono = telefonoInput.value.trim();
+          const direccion = direccionInput.value.trim();
+          const contrasenia = contraseniaInput.value;
+          const confirmarContrasenia = confirmarContraseniaInput.value;
+
+          if (nombre === "" || apellido === "" || telefono === "" || direccion === "" || contrasenia === "" || confirmarContrasenia === "") {
+            alert("Completá todos los campos.");
+            return;
+          }
+
+          if (contrasenia !== confirmarContrasenia) {
+            alert("Las contraseñas no coinciden.");
+            return;
+          }
+
+          const response = await fetch(baseApiUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: emailParaRegistro,
+              nombre: nombre,
+              apellido: apellido,
+              telefono: telefono,
+              direccion: direccion,
+              contrasenia: contrasenia,
+            }),
+          });
+
+          if (response.status === 201) {
+            const usuarioCreado = await response.json();
+
+            localStorage.removeItem("email_para_registro");
+
+            localStorage.setItem("usuario_actual", JSON.stringify(usuarioCreado));
+
+            alert("Cuenta creada con éxito. ¡Bienvenido!");
+            window.location.href = "index.html";
+            return;
+          }
+
+          const textoError = await response.text();
+          console.error("Error al registrar usuario:", response.status, textoError);
+          alert("No se pudo crear la cuenta. Revisá los datos o intentá más tarde.");
+        };
     </script>
   </body>
 </html>
