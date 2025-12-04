@@ -166,57 +166,7 @@
       </div>
     </footer>
     <script>
-      const btnIngresar = document.getElementById("btn-ingresar");
-      const loginEmail = document.getElementById("login-email");
-      const loginContrasenia = document.getElementById("login-contrasenia");
-
-      const registroEmail = document.getElementById("registro-email");
-      const btnIrARegistro = document.getElementById("btn-ir-a-registro");
-
-      btnIngresar.addEventListener("click", async () => {
-        const email = loginEmail.value.trim();
-        const contrasenia = loginContrasenia.value.trim();
-
-        if (!email || !contrasenia) {
-          alert("Completá email y contraseña.");
-          return;
-        }
-
-        try {
-          const respuesta = await fetch("http://localhost:3000/usuarios/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, contrasenia }),
-          });
-
-          if (!respuesta.ok) {
-            alert("Email o contraseña incorrectos.");
-            return;
-          }
-
-          const usuario = await respuesta.json();
-
-          localStorage.setItem("usuarioLogueado", JSON.stringify(usuario));
-          window.location.href = "index.html";
-        } catch (error) {
-          console.error(error);
-          alert("Ocurrió un error al ingresar.");
-        }
-      });
-
-      btnIrARegistro.addEventListener("click", () => {
-        const email = registroEmail.value.trim();
-
-        if (!email) {
-          alert("Ingresá un correo electrónico para registrarte.");
-          return;
-        }
-
-        localStorage.setItem("emailRegistro", email);
-        window.location.href = "registro.html";
-      });
+      
     </script>
   </body>
 </html>

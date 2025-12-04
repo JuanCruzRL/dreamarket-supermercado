@@ -5,7 +5,7 @@ CREATE TABLE usuarios (
   apellido    VARCHAR(100) NOT NULL,
   telefono    VARCHAR(50),
   direccion   VARCHAR(255),
-  contrasena  VARCHAR(255) NOT NULL
+  contrasenia  VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE productos (
