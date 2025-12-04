@@ -20,11 +20,19 @@ CREATE TABLE productos (
 );
 
 CREATE TABLE pedidos (
-  id_pedido       SERIAL PRIMARY KEY,
-  id_cliente      INT REFERENCES usuarios(id_usuario),
+  id_pedido          SERIAL PRIMARY KEY,
+  id_cliente         INT REFERENCES usuarios(id_usuario),
+  domicilio_entrega  VARCHAR(255) NOT NULL,
+  estado             VARCHAR(50) NOT NULL,
+  repartidor         VARCHAR(100),
+  total              NUMERIC(10,2) NOT NULL,
+  fecha_creacion     TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE pedido_productos (
+  id_pedido       INT REFERENCES pedidos(id_pedido),
   id_producto     INT REFERENCES productos(id_producto),
   cantidad        INT NOT NULL,
-  estado          VARCHAR(50) NOT NULL,
-  repartidor      VARCHAR(100),
-  fecha_creacion  TIMESTAMP DEFAULT NOW()
+  precio_unitario NUMERIC(10,2) NOT NULL,
+  PRIMARY KEY (id_pedido, id_producto)
 );

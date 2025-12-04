@@ -112,62 +112,15 @@
         </div>
       </div>
     </section>
-    <footer class="footer">
-      <div class="container">
-        <div class="columns">
-          <div class="column is-3">
-            <p class="title is-6 mb-3">Dreammarket</p>
-            <p class="is-size-7">
-              Tu supermercado online: frescos, almacén, limpieza y más, con
-              entrega rápida y segura.
-            </p>
-          </div>
-          <div class="column is-3">
-            <p class="title is-6 mb-3">Ayuda</p>
-            <ul class="is-size-7">
-              <li><a href="/envios.html">Envíos y horarios</a></li>
-              <li><a href="/devoluciones.html">Devoluciones</a></li>
-              <li>
-                <a href="/preguntas-frecuentes.html">Preguntas frecuentes</a>
-              </li>
-              <li><a href="/contacto.html">Contacto</a></li>
-            </ul>
-          </div>
-          <div class="column is-3">
-            <p class="title is-6 mb-3">Medios de pago</p>
-            <ul class="is-size-7">
-              <li>Tarjetas de crédito y débito</li>
-              <li>Transferencia / depósito</li>
-              <li>Mercado Pago</li>
-            </ul>
-          </div>
-          <div class="column is-3">
-            <p class="title is-6 mb-3">Contacto</p>
-            <p class="is-size-7">
-              WhatsApp:
-              <a href="https://wa.me/5491112345678">+54 9 11 1234-5678</a><br />
-              Email:
-              <a href="mailto:hola@dreammarket.com">hola@dreammarket.com</a>
-            </p>
-
-            <p class="title is-6 mb-2 mt-4">Seguinos</p>
-            <div class="buttons">
-              <a class="button is-small is-light dm-btn" href="#" target="_blank"
-                >Instagram</a
-              >
-              <a class="button is-small is-light dm-btn" href="#" target="_blank"
-                >Facebook</a
-              >
-            </div>
-          </div>
-        </div>
-
-        <div class="has-text-centered is-size-7 mt-5">
-          © 2025 Dreammarket · Todos los derechos reservados
-        </div>
-      </div>
-    </footer>
+    <div id="footer-placeholder"></div>
     <script>
+      async function cargarFooter() {
+        const respuesta = await fetch("./footer.html");
+        const html = await respuesta.text();
+        document.getElementById("footer-placeholder").innerHTML = html;
+      }
+      cargarFooter();
+
       const baseApiUrl = "http://localhost:3000/usuarios";
       const loginEmailInput = document.getElementById("login-email");
       const loginContraseniaInput = document.getElementById("login-contrasenia");

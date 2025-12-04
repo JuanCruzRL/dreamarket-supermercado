@@ -10,107 +10,15 @@
 </head>
 
 <body>
-  <nav class="navbar" role="navigation">
-    <div class="navbar-brand">
-      <a class="logo" href="./index.html">
-        <img src="imagenes/logo.png" alt="Dreamarket" width="112" height="50" />
-      </a>
-      <a role="button" class="navbar-burger" data-target="navbarBasicExample"></a>
-    </div>
-
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item" href="./descuentos.html">
-          Descuentos
-        </a>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Almacen
-          </a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item">Golosinas</a>
-            <a class="navbar-item">Panadería</a>
-            <a class="navbar-item">Snacks</a>
-            <a class="navbar-item">Aceites y condimentos</a>
-            <a class="navbar-item">Mermeladas y dulces</a>
-            <a class="navbar-item">Galletitas</a>
-            <a class="navbar-item">Conservas y enlatados</a>
-            <a class="navbar-item">Harinas y pastas</a>
-          </div>
-        </div>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Bebidas
-          </a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item">Bebidas sin alcohol</a>
-            <a class="navbar-item">Bebidas alcohólicas</a>
-            <a class="navbar-item">Infusiones</a>
-
-          </div>
-        </div>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Congelados
-          </a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item">Verduras congeladas</a>
-            <a class="navbar-item">Papas fritas</a>
-            <a class="navbar-item">Hamburguesas</a>
-            <a class="navbar-item">Helados</a>
-            <a class="navbar-item">Frutas congeladas</a>
-          </div>
-        </div>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Limpieza
-          </a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item">Detergentes</a>
-            <a class="navbar-item">Desinfectantes</a>
-            <a class="navbar-item">Lavandina</a>
-            <a class="navbar-item">Suavizantes</a>
-            <a class="navbar-item">Escobas y trapos</a>
-          </div>
-        </div>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Carnes
-          </a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item">Carne vacuna</a>
-            <a class="navbar-item">Pollo</a>
-            <a class="navbar-item">Cerdo</a>
-            <a class="navbar-item">Pescado</a>
-            <a class="navbar-item">Embutidos</a>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <a class="button is-primary" href="./carrito.html">
-              <strong>Carrito 🛒</strong>
-            </a>
-            <a class="button is-light" href="./ingresar.html">
-              Ingresar👤
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
-
+  <div id="navbar-placeholder"></div>
   <div class="container">
     <div class="has-text-centered">
       <div class="field has-addons is-justify-content-center" style="max-width: 400px; margin: 0 auto;">
         <div class="control is-expanded">
-          <input class="input" type="text" placeholder="Buscar productos...">
+          <input id="input_busqueda" class="input" type="text" placeholder="Buscar productos...">
         </div>
         <div class="control">
-          <button class="button is-primary">
+          <button id="boton_busqueda" class="button is-primary" onclick="hacer_busqueda()">
             Buscar
           </button>
         </div>
@@ -134,18 +42,22 @@
                     </div>
                     <div class="dropdown-menu menu-productos" role="menu">
                       <div class="dropdown-content">
-                        <a class="dropdown-item"> Golosinas </a>
-                        <a class="dropdown-item"> Snacks </a>
-                        <a class="dropdown-item"> Mermeladas y dulces </a>
-                        <a class="dropdown-item"> Conservas y enlatados </a>
-                        <a class="dropdown-item"> Panadería </a>
-                        <a class="dropdown-item"> Aceites y condimentos </a>
-                        <a class="dropdown-item"> Galletitas </a>
-                        <a class="dropdown-item"> Harinas y pastas </a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Golosinas')">Golosinas</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Snacks')">Snacks</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Mermeladas y dulces')">Mermeladas y
+                          dulces</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Conservas y enlatados')">Conservas y
+                          enlatados</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Panadería')">Panadería</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Aceites y condimentos')">Aceites y
+                          condimentos</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Galletitas')">Galletitas</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Harinas y pastas')">Harinas y pastas</a>
                       </div>
                     </div>
                   </div>
                 </li>
+
                 <li>
                   <div class="dropdown is-hoverable is-right">
                     <div class="dropdown-trigger">
@@ -153,13 +65,16 @@
                     </div>
                     <div class="dropdown-menu menu-productos" role="menu">
                       <div class="dropdown-content">
-                        <a class="dropdown-item"> Bebidas sin alcohol </a>
-                        <a class="dropdown-item"> Bebidas alcohólicas </a>
-                        <a class="dropdown-item"> Infusiones </a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Bebidas sin alcohol')">Bebidas sin
+                          alcohol</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Bebidas alcohólicas')">Bebidas
+                          alcohólicas</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Infusiones')">Infusiones</a>
                       </div>
                     </div>
                   </div>
                 </li>
+
                 <li>
                   <div class="dropdown is-hoverable is-right">
                     <div class="dropdown-trigger">
@@ -167,15 +82,18 @@
                     </div>
                     <div class="dropdown-menu menu-productos" role="menu">
                       <div class="dropdown-content">
-                        <a class="dropdown-item"> Verduras congeladas </a>
-                        <a class="dropdown-item"> Hamburguesas </a>
-                        <a class="dropdown-item"> Frutas congeladas </a>
-                        <a class="dropdown-item"> Papas fritas </a>
-                        <a class="dropdown-item"> Helados </a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Verduras congeladas')">Verduras
+                          congeladas</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Hamburguesas')">Hamburguesas</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Frutas congeladas')">Frutas
+                          congeladas</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Papas fritas')">Papas fritas</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Helados')">Helados</a>
                       </div>
                     </div>
                   </div>
                 </li>
+
                 <li>
                   <div class="dropdown is-hoverable is-right">
                     <div class="dropdown-trigger">
@@ -183,15 +101,16 @@
                     </div>
                     <div class="dropdown-menu menu-productos" role="menu">
                       <div class="dropdown-content">
-                        <a class="dropdown-item"> Detergentes </a>
-                        <a class="dropdown-item"> Lavandina </a>
-                        <a class="dropdown-item"> Escobas y trapos </a>
-                        <a class="dropdown-item"> Desinfectantes </a>
-                        <a class="dropdown-item"> Suavizantes </a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Detergentes')">Detergentes</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Lavandina')">Lavandina</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Escobas y trapos')">Escobas y trapos</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Desinfectantes')">Desinfectantes</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Suavizantes')">Suavizantes</a>
                       </div>
                     </div>
                   </div>
                 </li>
+
                 <li>
                   <div class="dropdown is-hoverable is-right">
                     <div class="dropdown-trigger">
@@ -199,11 +118,11 @@
                     </div>
                     <div class="dropdown-menu menu-productos" role="menu">
                       <div class="dropdown-content">
-                        <a class="dropdown-item"> Carne vacuna </a>
-                        <a class="dropdown-item"> Cerdo </a>
-                        <a class="dropdown-item"> Embutidos </a>
-                        <a class="dropdown-item"> Pescado </a>
-                        <a class="dropdown-item"> Pollo </a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Carne vacuna')">Carne vacuna</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Cerdo')">Cerdo</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Embutidos')">Embutidos</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Pescado')">Pescado</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Pollo')">Pollo</a>
                       </div>
                     </div>
                   </div>
@@ -212,178 +131,49 @@
 
               <p class="menu-label mt-4">Ofertas</p>
               <ul class="menu-list">
-                <li>
-                  <a href="#">10% OFF</a>
-                </li>
-                <li>
-                  <a href="#">20% OFF</a>
-                </li>
-                <li>
-                  <a href="#">30% OFF</a>
-                </li>
-                <li>
-                  <a href="#">40% OFF</a>
-                </li>
-                <li>
-                  <a href="#">50% OFF</a>
-                </li>
-                <li>
-                  <a href="#">Dreamweek!</a>
-                </li>
-                <li>
-                  <a href="#">2x1</a>
-                </li>
-                <li>
-                  <a href="#">3x2</a>
-                </li>
+                <li><a onclick="filtrar('descuento','10%')">10% OFF</a></li>
+                <li><a onclick="filtrar('descuento','20%')">20% OFF</a></li>
+                <li><a onclick="filtrar('descuento','30%')">30% OFF</a></li>
+                <li><a onclick="filtrar('descuento','40%')">40% OFF</a></li>
+                <li><a onclick="filtrar('descuento','50%')">50% OFF</a></li>
+                <li><a onclick="filtrar('descuento','Dreamweek')">Dreamweek!</a></li>
+                <li><a onclick="filtrar('descuento','2x1')">2x1</a></li>
+                <li><a onclick="filtrar('descuento','3x2')">3x2</a></li>
+
+                <li><a style="color:red" onclick="borrar_filtros()">❌ Eliminar filtros</a></li>
               </ul>
             </aside>
+
           </div>
         </div>
 
         <div class="column is-9">
-          <div class="columns is-multiline is-centered">
-
-            <div class="column is-one-quarter">
-              <div class="card pag-productos">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="./imagenes/magistral.jpg">
-                  </figure>
-                </div>
-                <div class="card-content has-text-centered">
-                  <p class="title is-6">Detergente Limon Magistral 500ml.</p>
-                  <p class="subtitle is-6">
-                    <s>$4.200</s> <strong>$.2520</strong><br>
-                    <span class="tag is-danger is-light" style="margin-top: 5px">40% OFF</span>
-                  </p>
-                  <button class="button is-danger is-small">Agregar</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="column is-one-quarter">
-              <div class="card pag-productos">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="./imagenes/paty12u.jpg">
-                  </figure>
-                </div>
-                <div class="card-content has-text-centered">
-                  <p class="title is-6">Hamburguesas Paty 12u.</p>
-                  <p class="subtitle is-6">
-                    <s>$18.500</s> <strong>$12.950</strong><br>
-                    <span class="tag dreamweek-tag">Dreamweek</span>
-                    <span class="tag is-danger is-light" style="margin-top: 5px">30% OFF</span>
-                  </p>
-                  <button class="button is-danger is-small">Agregar</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="column is-one-quarter">
-              <div class="card pag-productos">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="./imagenes/mantecailolay.jpg">
-                  </figure>
-                </div>
-                <div class="card-content has-text-centered">
-                  <p class="title is-6">Manteca Ilolay 200g</p>
-                  <p class="subtitle is-6">
-                    <s>$3.900</s> <strong>$3.510</strong><br>
-                    <span class="tag is-danger is-light" style="margin-top: 5px">10% OFF</span>
-                  </p>
-                  <button class="button is-danger is-small">Agregar</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="column is-one-quarter">
-              <div class="card pag-productos">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="./imagenes/alfajorjorgito.jpg">
-                  </figure>
-                </div>
-                <div class="card-content has-text-centered">
-                  <p class="title is-6">Alfajor blanco Jorgito 50g.</p>
-                  <p class="subtitle is-6">
-                    <s>$1.000</s> <strong>$800</strong><br>
-                    <span class="tag is-danger is-light" style="margin-top: 5px">20% OFF</span>
-                  </p>
-                  <button class="button is-danger is-small">Agregar</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="column is-one-quarter">
-              <div class="card pag-productos">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="./imagenes/papaslays.jpg">
-                  </figure>
-                </div>
-                <div class="card-content has-text-centered">
-                  <p class="title is-6">Papas fritas Lays 122g.</p>
-                  <p class="subtitle is-6">
-                    <strong>$4.725</strong>
-                  </p>
-                  <button class="button is-danger is-small">Agregar</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="column is-one-quarter">
-              <div class="card pag-productos">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="./imagenes/cervezapatagonia.jpg">
-                  </figure>
-                </div>
-                <div class="card-content has-text-centered">
-                  <p class="title is-6">Cerveza Ipa Patagonia 730cc.</p>
-                  <p class="subtitle is-6">
-                    <s>$5.800</s> <strong>$3.840</strong><br>
-                    <span class="tag dreamweek-tag">Dreamweek</span>
-                    <span class="tag is-danger is-light" style="margin-top: 5px">40% OFF</span>
-                  </p>
-                  <button class="button is-danger is-small">Agregar</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="column is-one-quarter">
-              <div class="card pag-productos">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="./imagenes/yerbarosamonte.jpg">
-                  </figure>
-                </div>
-                <div class="card-content has-text-centered">
-                  <p class="title is-6">Yerba Mate Rosamonte 500g.</p>
-                  <p class="subtitle is-6">
-                    <s>$7.200</s> <strong>$5.760</strong><br>
-                    <span class="tag is-danger is-light" style="margin-top: 5px">20% OFF</span>
-                  </p>
-                  <button class="button is-danger is-small">Agregar</button>
-                </div>
-              </div>
-            </div>
-
+          <div id="contenedor_productos" class="columns is-multiline is-centered">
           </div>
         </div>
 
         <div class="column is-3" style="margin-left: 40px;">
-            <figure class="image">
-              <img src="./imagenes/banner_vertical.jpg">
-            </figure>
+          <figure class="image">
+            <img src="./imagenes/banner_vertical.jpg">
+          </figure>
         </div>
 
       </div>
 
     </div>
   </section>
+
+  <div class="container">
+    <div class="columns is-centered" style="margin-bottom: 15px;">
+      <div class="column is-narrow">
+        <nav class="pagination" role="navigation">
+          <button class="pagination-previous" id="prevBtn">Anterior</button>
+          <ul class="pagination-list" id="paginacion"></ul>
+          <button class="pagination-next" id="nextBtn">Siguiente</button>
+        </nav>
+      </div>
+    </div>
+  </div>
 
   <footer class="footer">
     <div class="container">
@@ -436,6 +226,132 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    async function cargarFooter() {
+        const respuesta = await fetch("./footer.html");
+        const html = await respuesta.text();
+        document.getElementById("footer-placeholder").innerHTML = html;
+      }
+      cargarFooter();
+      async function cargarNavbar() {
+        const respuesta = await fetch("./navbar.html");
+        const html = await respuesta.text();
+        document.getElementById("navbar-placeholder").innerHTML = html;
+      }
+      cargarNavbar();
+
+    const url_productos = "http://localhost:3000/productos";
+    const regex_porcentaje = /^[0-9]+%$/;
+    const regex_multiplo = /^[0-9]+x[0-9]+$/i;
+    const regex_dreamweek = /dreamweek/i;
+
+    const params = window.location.search;
+    fetch(url_productos + params).then((response) => {
+        return response.json();
+      }).then(data => {
+        const contenedor = document.getElementById("contenedor_productos");
+
+        data.forEach(producto => {
+          const descuento = (producto.descuento || "").trim();
+
+          let tipo = "ninguno";
+          let num_descuento = 0;
+          let tags_html = "";
+
+          if (regex_porcentaje.test(descuento)) {
+            tipo = "porcentaje";
+            num_descuento = parseInt(descuento.replace("%", ""));
+            tags_html = `<span class="tag is-danger is-light" style="margin-top:5px">${num_descuento}% OFF</span>`;
+          }
+          else if (regex_multiplo.test(descuento)) {
+            tipo = "multiplo";
+            tags_html = `<span class="tag is-danger is-light" style="margin-top:5px">${descuento}</span>`;
+          }
+          else if (regex_dreamweek.test(descuento)) {
+            tipo = "texto";
+            if (descuento.toLowerCase() === "dreamweek") {
+              num_descuento = 50;
+
+              tags_html = `
+                <span class="tag dreamweek-tag" style="margin-top:5px">Dreamweek!</span>
+                <span class="tag is-danger is-light" style="margin-top:5px">50% OFF</span>
+              `;
+            } else {
+              tags_html = `<span class="tag is-danger is-light" style="margin-top:5px">${descuento}</span>`;
+            }
+          }
+
+          const precio_final = producto.precio - (producto.precio * num_descuento / 100);
+
+          let precio_original_html = "";
+          let precio_final_html = "";
+
+          if (num_descuento > 0) {
+            precio_original_html = `<s>$${producto.precio}</s>`;
+            precio_final_html = `$${precio_final.toFixed(0)}`;
+          } else {
+            precio_final_html = `$${producto.precio}`;
+          }
+
+          contenedor.innerHTML += `
+              <div class="column is-one-quarter">
+                <div class="card pag-productos">
+
+                  <div class="card-image">
+                    <figure class="image is-4by3">
+                      <img src="${producto.imagen}">
+                    </figure>
+                  </div>
+
+                  <div class="card-content has-text-centered">
+                    <p class="title is-6">${producto.nombre} ${producto.marca}</p>
+
+                    <p class="subtitle is-6">
+                      ${precio_original_html}
+                      <strong>${precio_final_html}</strong><br>
+                      ${tags_html}
+                    </p>
+
+                    <button class="button is-danger is-small">Agregar</button>
+                  </div>
+
+                </div>
+              </div>
+            `;
+
+        });
+      });
+
+    function filtrar(tipo, valor) {
+      const url = new URL(document.URL);
+      url.searchParams.set(tipo, valor);
+
+      location.href = url.toString();
+    }
+
+    function borrar_filtros() {
+      location.href = location.pathname;
+    }
+
+    function hacer_busqueda() {
+      const input_busqueda = document.getElementById("input_busqueda");
+      const texto_buscado = input_busqueda.value.trim();
+      const url = new URL(document.URL);
+
+      if (texto_buscado === "") {
+        url.searchParams.delete("nombre");
+      } else {
+        url.searchParams.set("nombre", texto_buscado);
+      }
+
+      location.href = url.toString();
+    }
+
+  </script>
+
+
+
 </body>
 
 </html>
