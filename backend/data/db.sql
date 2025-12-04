@@ -30,9 +30,9 @@ CREATE TABLE pedidos (
 );
 
 CREATE TABLE pedido_productos (
-  PRIMARY KEY (id_pedido, id_producto)
   id_pedido       INT REFERENCES pedidos(id_pedido),
   id_producto     INT REFERENCES productos(id_producto),
   cantidad        INT NOT NULL,
   precio_unitario NUMERIC(10,2) NOT NULL,
+  PRIMARY KEY (id_pedido, id_producto)
 );
