@@ -56,16 +56,21 @@
     <div class="container">
       <div class="columns">
         <div class="column">
-          <table class="table is-bordered is-fullwidth">
-            <thead class="has-background-black">
-              <th class="has-text-white has-text-centered">Imagen</th>
-              <th class="has-text-white has-text-centered">Producto</th>
-              <th class="has-text-white has-text-centered">Precio</th>
-              <th class="has-text-white has-text-centered">Cantidad</th>
-              <th class="has-text-white has-text-centered">Subtotal</th>
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+              </tr>
             </thead>
-            
+            <tbody id="carrito-body"></tbody>
           </table>
+          <p class="has-text-right" style="margin-top: 10px;">
+            Total: <strong id="carrito-total">$0</strong>
+          </p>
           <div class="has-text-centered mt-5">
             <button class="button is-primary is-medium">
               Finalizar compra
@@ -83,6 +88,53 @@
         document.getElementById("footer-placeholder").innerHTML = html;
       }
       cargarFooter();
+      
+      function obtenerCarrito() {
+        const carritoGuardado = localStorage.getItem("dreammarket_carrito");
+        if (carritoGuardado === null) {
+          return [];
+        }
+        return JSON.parse(carritoGuardado);
+      }
+
+      const cuerpoTablaCarrito = document.getElementById("carrito-body");
+      const elementoTotalCarrito = document.getElementById("carrito-total");
+
+      function cargarCarritoEnPantalla() {
+        const carrito = obtenerCarrito();
+        cuerpoTablaCarrito.innerHTML = "";
+        let total = 0;
+
+        carrito.forEach(function (item) {
+          const subtotal = item.precioUnitario * item.cantidad;
+          total = total + subtotal;
+
+          cuerpoTablaCarrito.innerHTML += `
+            <tr>
+              <td><img src="${item.imagen}" style="width: 70px;"></td>
+              <td>${item.nombre} ${item.marca}</td>
+              <td>$${item.precioUnitario.toFixed ? item.precioUnitario.toFixed(0) : item.precioUnitario}</td>
+
+              <td>
+                <button class="button cambiar-cantidad">-</button>
+                <span class="cantidad-valor">${item.cantidad}</span>
+                <button class="button cambiar-cantidad">+</button>
+              </td>
+
+              <td>$${subtotal.toFixed(0)}</td>
+            </tr>
+          `;
+        });
+
+        elementoTotalCarrito.textContent = "$" + total.toFixed(0);
+      }
+
+      function guardarCarrito(carrito) {
+        localStorage.setItem("dreammarket_carrito", JSON.stringify(carrito));
+      }
+
+
+      cargarCarritoEnPantalla();
     </script>
   </body>
 </html>
