@@ -1,11 +1,9 @@
-import { Pool } from 'pg'
- 
-const db = new Pool({
-  user: 'postgres',
-  password: 'password',
-  host: 'localhost',
-  port: 5433,
-  database: 'dreamarket_db',
-})
+import pkg from "pg";
+const { Pool } = pkg;
+import dotenv from "dotenv";
 
-export default db;
+dotenv.config();
+
+export const pool = new Pool({
+  connectionString: process.env.DATABASE_URL
+});
