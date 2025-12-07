@@ -1,4 +1,4 @@
-import db from "./db.js";
+import { pool } from "./db.js";
 
 export async function get_all_orders() {
   const response = await db.query("SELECT * FROM pedidos ORDER BY fecha_creacion DESC");
