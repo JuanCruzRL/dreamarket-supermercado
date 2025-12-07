@@ -35,7 +35,7 @@ export async function update_user(email, nombre, apellido, telefono, direccion, 
 }
 
 export async function delete_user(id_usuario) {
-  await db.query("DELETE FROM usuarios WHERE id_usuario = $1", [id_usuario]);
+  await pool.query("DELETE FROM usuarios WHERE id_usuario = $1", [id_usuario]);
 }
 
 export async function create_user(email, nombre, apellido, telefono, direccion, contrasenia) {
