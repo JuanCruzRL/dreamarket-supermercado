@@ -1,18 +1,17 @@
 import { pool } from "./db.js";
 
 export async function get_all_orders() {
-  const response = await db.query("SELECT * FROM pedidos ORDER BY fecha_creacion DESC");
+  const response = await pool.query("SELECT * FROM pedidos ORDER BY fecha_creacion DESC");
   return response.rows;
-}
-
+  }
 export async function get_order(id_pedido) {
-  const pedido = await db.query("SELECT * FROM pedidos WHERE id_pedido = $1", [id_pedido]);
+  const pedido = await pool.query("SELECT * FROM pedidos WHERE id_pedido = $1", [id_pedido]);
 
   if (pedido.rowCount === 0){
     return undefined;
   }
 
-  const productos = await db.query(
+  const productos = await pool.query(
     `SELECT pp.id_producto, producto.nombre, pp.cantidad, pp.precio_unitario
      FROM pedido_productos pp
      JOIN productos producto ON producto.id_producto = pp.id_producto
@@ -33,7 +32,7 @@ export async function get_order(id_pedido) {
 }
 
 export async function create_order(id_cliente, domicilio_entrega, estado, repartidor, productos) {
-  const pedido = await db.query(
+  const pedido = await pool.query(
     `INSERT INTO pedidos (id_cliente, domicilio_entrega, estado, repartidor, total)
      VALUES ($1, $2, $3, $4, 0)
      RETURNING id_pedido`,
@@ -44,13 +43,13 @@ export async function create_order(id_cliente, domicilio_entrega, estado, repart
 
   let total = 0;
   for (const producto of productos) {
-    const prod = await db.query("SELECT precio FROM productos WHERE id_producto = $1", [producto.id_producto]);
+    const prod = await pool.query("SELECT precio FROM productos WHERE id_producto = $1", [producto.id_producto]);
 
     const precio_unitario = prod.rows[0].precio;
     const subtotal = precio_unitario * producto.cantidad;
     total += subtotal;
 
-    await db.query(
+    await pool.query(
       `INSERT INTO pedido_productos 
        (id_pedido, id_producto, cantidad, precio_unitario)
        VALUES ($1, $2, $3, $4)`,
@@ -58,7 +57,7 @@ export async function create_order(id_cliente, domicilio_entrega, estado, repart
     );
   }
 
-  await db.query(
+  await pool.query(
     `UPDATE pedidos SET total = $1 WHERE id_pedido = $2`,
     [total, id_pedido]
   );
@@ -67,7 +66,7 @@ export async function create_order(id_cliente, domicilio_entrega, estado, repart
 }
 
 export async function update_order(id_pedido, estado, repartidor) {
-  const response = await db.query(
+  const response = await pool.query(
     `UPDATE pedidos
      SET estado = $2, repartidor = $3
      WHERE id_pedido = $1
@@ -79,7 +78,7 @@ export async function update_order(id_pedido, estado, repartidor) {
 }
 
 export async function delete_order(id_pedido) {
-  await db.query("DELETE FROM pedido_productos WHERE id_pedido = $1", [id_pedido]);
+  await pool.query("DELETE FROM pedido_productos WHERE id_pedido = $1", [id_pedido]);
 
-  await db.query("DELETE FROM pedidos WHERE id_pedido = $1", [id_pedido]);
+  await pool.query("DELETE FROM pedidos WHERE id_pedido = $1", [id_pedido]);
 }
