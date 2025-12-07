@@ -375,18 +375,15 @@
 
     function agregarProductoAlCarrito(productoParaAgregar) {
       const carritoActual = obtenerCarrito();
-      console.log("Asdadsas");
+      console.log("LLAMADA A LA FUNCION A VER SI FUNCA");
       
       const indiceExistente = carritoActual.findIndex(function (item) {
         return item.id_producto === productoParaAgregar.id_producto;
       });
 
       if (indiceExistente !== -1) {
-        
-        carritoActual[indiceExistente].cantidad =
-          carritoActual[indiceExistente].cantidad + 1;
+        carritoActual[indiceExistente].cantidad += 1;
       } else {
-        
         productoParaAgregar.cantidad = 1;
         carritoActual.push(productoParaAgregar);
       }
@@ -397,7 +394,7 @@
     
     function clickAgregarProducto(boton) {
       const productoParaAgregar = {
-        id_producto: Number(boton.dataset.id_producto),
+        id_producto: Number(boton.dataset.idProducto),
         nombre: boton.dataset.nombre,
         marca: boton.dataset.marca,
         imagen: boton.dataset.imagen,
