@@ -132,6 +132,7 @@
       </div>
     </div>
   </section>
+
   <div class="modal" id="modal-perfil">
     <div class="modal-background"></div>
     <div class="modal-card">
@@ -190,7 +191,9 @@
       </footer>
     </div>
   </div>
+
   <div id="footer-placeholder"></div>
+  
     <script>
       async function cargarFooter() {
         const respuesta = await fetch("./footer.html");
@@ -202,11 +205,25 @@
         const respuesta = await fetch("./navbar.html");
         const html = await respuesta.text();
         document.getElementById("navbar-placeholder").innerHTML = html;
+
+        botonUsuario = document.getElementById("btn-usuario");
+        usuariologueado = localStorage.getItem("usuario_actual");
+
+        if (usuariologueado) {
+          botonUsuario.textContent = "Perfil 👤";
+          botonUsuario.removeAttribute("href");
+          botonUsuario.onclick = function () {
+            abrir_perfil();
+          };
+        } else {
+          botonUsuario.textContent = "Ingresar 👤";
+          botonUsuario.href = "./ingresar.html";
+          botonUsuario.onclick = null;
+        }
       }
       cargarNavbar();
       const baseApiUrl = "http://localhost:3000/usuarios";
 
-      botonUsuario = document.getElementById("btn-usuario");
       modalPerfil = document.getElementById("modal-perfil");
       modalBackground = modalPerfil.querySelector(".modal-background");
       botonCerrarModal = document.getElementById("btn-cerrar-modal");
@@ -222,20 +239,6 @@
       botonEliminarCuenta = document.getElementById("btn-eliminar-cuenta");
 
       contraseniaActual = "";
-
-      usuariologueado = localStorage.getItem("usuario_actual");
-
-      if (usuariologueado) {
-        botonUsuario.textContent = "Perfil 👤";
-        botonUsuario.removeAttribute("href");
-        botonUsuario.onclick = function () {
-          abrir_perfil();
-        };
-      } else {
-        botonUsuario.textContent = "Ingresar 👤";
-        botonUsuario.href = "./ingresar.html";
-        botonUsuario.onclick = null;
-      }
 
       async function abrir_perfil() {
         usuarioJSON = localStorage.getItem("usuario_actual");
@@ -319,7 +322,8 @@
           console.log("Error al actualizar perfil:", response.status, texto);
           alert("No se pudo actualizar el perfil.");
         }
-        }
+      }
+
       async function eliminar_cuenta () {
         usuarioJSON = localStorage.getItem("usuario_actual");
 
