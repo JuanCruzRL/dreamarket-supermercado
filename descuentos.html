@@ -348,7 +348,17 @@
                   ${tags_html}
                 </p>
 
-                <button class="button is-danger is-small">Agregar</button>
+                <button
+                  class="button is-danger is-small btn-agregar-carrito"
+                  onclick="clickAgregarProducto(this)"
+                  data-id-producto="${producto.id_producto}"
+                  data-nombre="${producto.nombre}"
+                  data-marca="${producto.marca}"
+                  data-precio="${precio_final}"
+                  data-imagen="${producto.imagen}"
+                  data-descuento="${producto.descuento || ""}">
+                  Agregar
+                </button>
               </div>
 
             </div>
@@ -383,6 +393,49 @@
       mostrar_productos("descuentos-dreamweek", cuatro_prod_dreamweek);
     }
     cargar_descuentos();
+
+    function obtenerCarrito() {
+      const carritoGuardado = localStorage.getItem("dreammarket_carrito");
+      if (carritoGuardado === null) {
+        
+        return [];
+      }
+      return JSON.parse(carritoGuardado);
+    }
+
+    function guardarCarrito(carrito) {
+      localStorage.setItem("dreammarket_carrito", JSON.stringify(carrito));
+    }
+
+    function agregarProductoAlCarrito(productoParaAgregar) {
+      const carritoActual = obtenerCarrito();
+      
+      const indiceExistente = carritoActual.findIndex(function (item) {
+        return item.id_producto === productoParaAgregar.id_producto;
+      });
+
+      if (indiceExistente !== -1) {
+        carritoActual[indiceExistente].cantidad += 1;
+      } else {
+        productoParaAgregar.cantidad = 1;
+        carritoActual.push(productoParaAgregar);
+      }
+
+      guardarCarrito(carritoActual);
+    }
+
+    
+    function clickAgregarProducto(boton) {
+      const productoParaAgregar = {
+        id_producto: Number(boton.dataset.idProducto),
+        nombre: boton.dataset.nombre,
+        marca: boton.dataset.marca,
+        imagen: boton.dataset.imagen,
+        precioUnitario: Number(boton.dataset.precio),
+        descuento: boton.dataset.descuento || ""
+      };
+      agregarProductoAlCarrito(productoParaAgregar);
+    }
   </script>
 </body>
 
