@@ -146,3 +146,42 @@ async function cerrar_sesion() {
     cerrar_perfil();
     window.location.reload();
 }
+
+async function abrir_modal_pedidos() {
+  usuario = JSON.parse(localStorage.getItem("usuario_actual"));
+
+  response = await fetch("http://localhost:3000/pedidos");
+  pedidos = await response.json();
+
+  pedidosUsuario = pedidos.filter(p => p.id_cliente === usuario.id_usuario);
+
+  cuerpo = document.getElementById("tabla-pedidos");
+  cuerpo.innerHTML = "";
+
+  pedidosUsuario.forEach(p => {
+    cuerpo.innerHTML += `
+      <tr>
+        <td>${p.id_pedido}</td>
+        <td>${new Date(p.fecha_creacion).toLocaleDateString()}</td>
+        <td>$${p.total}</td>
+        <td>${p.estado}</td>
+        <td>
+          <button class="button is-small is-warning"
+            onclick="editar_pedido(${p.id_pedido})">
+            Modificar
+          </button>
+          <button class="button is-small is-danger"
+            onclick="eliminar_pedido(${p.id_pedido})">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("modal-pedidos").classList.add("is-active");
+}
+
+function cerrar_modal_pedidos() {
+  document.getElementById("modal-pedidos").classList.remove("is-active");
+}

@@ -175,34 +175,83 @@
             <input id="perfil-direccion" class="input" type="text">
           </div>
         </div>
-        
+
         <div class="field">
           <label class="label">Contraseña</label>
           <div class="control">
-            <input id="perfil-contrasenia" class="input" type="password"
-                  placeholder="Escribí tu nueva contraseña">
+            <input id="perfil-contrasenia" class="input" type="password" placeholder="Escribí tu nueva contraseña">
           </div>
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-primary is-profile" id="btn-modificar-perfil" onclick="modificar_usuario()">Modificar perfil</button>
-        <button class="button is-profile is-danger" id="btn-eliminar-cuenta" onclick="eliminar_cuenta()">Eliminar cuenta</button>
-        <button class="button is-primary is-profile"  id="btn-modificar-perfil" onclick="cerrar_sesion()">Cerrar sesion</button>
+        <button class="button is-primary is-profile" id="btn-modificar-perfil" onclick="modificar_usuario()">Modificar
+          perfil</button>
+        <button class="button is-profile is-danger" id="btn-eliminar-cuenta" onclick="eliminar_cuenta()">Eliminar
+          cuenta</button>
+        <button class="button is-primary is-profile" id="btn-modificar-perfil" onclick="cerrar_sesion()">Cerrar
+          sesion</button>
+        <button class="button is-link is-profile" onclick="abrir_modal_pedidos()">Mis pedidos</button>
+      </footer>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-pedidos">
+    <div class="modal-background" onclick="cerrar_modal_pedidos()"></div>
+    <div class="modal-card" style="width: 800px">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Mis pedidos</p>
+        <button class="delete" onclick="cerrar_modal_pedidos()"></button>
+      </header>
+
+      <section class="modal-card-body">
+        <table class="table is-fullwidth">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Fecha</th>
+              <th>Total</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-pedidos"></tbody>
+        </table>
+      </section>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-editar-pedido">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Editar pedido</p>
+        <button class="delete"></button>
+      </header>
+
+      <section class="modal-card-body">
+        <div id="contenedor-productos-pedido"></div>
+      </section>
+
+      <footer class="modal-card-foot">
+        <button class="button is-primary">
+          Guardar cambios
+        </button>
       </footer>
     </div>
   </div>
 
   <div id="footer-placeholder"></div>
   <script src="./js/perfil.js"></script>
-    <script>
-      async function cargarFooter() {
-        const respuesta = await fetch("./footer.html");
-        const html = await respuesta.text();
-        document.getElementById("footer-placeholder").innerHTML = html;
-      }
-      cargarFooter();
-      
-      
-    </script>
-  </body>
+  <script>
+    async function cargarFooter() {
+      const respuesta = await fetch("./footer.html");
+      const html = await respuesta.text();
+      document.getElementById("footer-placeholder").innerHTML = html;
+    }
+    cargarFooter();
+
+
+  </script>
+</body>
+
 </html>
