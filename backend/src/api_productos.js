@@ -4,9 +4,32 @@ import { get_all_products, create_product, get_product, delete_product, update_p
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-    const productos = await get_all_products();
-    return res.status(200).json(productos);
+  let productos = await get_all_products();
+
+  const { categoria, descuento, nombre } = req.query;
+
+  if (categoria) {
+    productos = productos.filter(
+      producto => producto.categoria?.toLowerCase() === categoria.toLowerCase()
+    );
+  }
+
+  if (descuento) {
+    productos = productos.filter(
+      producto => (producto.descuento || "").toLowerCase() === descuento.toLowerCase()
+    );
+  }
+
+  if (nombre) {
+    const texto = nombre.toLowerCase();
+    productos = productos.filter(
+      producto => producto.nombre.toLowerCase().includes(texto)
+    );
+  }
+
+  return res.status(200).json(productos);
 });
+
 
 router.post("/", async (req, res) => {
     if (req.body === undefined) {
