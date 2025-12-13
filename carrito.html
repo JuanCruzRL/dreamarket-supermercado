@@ -39,7 +39,7 @@
             <button class="button is-danger is-medium" style="margin-right:5px" onclick="vaciar_carrito()">
               Vaciar carrito
             </button>
-            <button class="button is-primary is-medium">
+            <button class="button is-primary is-medium" onclick="finalizarCompra()">
               Finalizar compra
             </button>
           </div>
@@ -235,6 +235,59 @@
         cargarCarritoEnPantalla();
       }
       cargarCarritoEnPantalla();
+      async function finalizarCompra() {
+        const carrito = obtenerCarrito();
+
+        if (carrito.length === 0) {
+          alert("El carrito está vacío");
+          return;
+        }
+
+        const usuarioJSON = localStorage.getItem("usuario_actual");
+
+        if (!usuarioJSON) {
+          alert("Tenés que iniciar sesión para finalizar la compra");
+          window.location.href = "./ingresar.html";
+          return;
+        }
+
+        const usuario = JSON.parse(usuarioJSON);
+
+        
+
+        const productos = carrito.map(function (item) {
+          return {
+            id_producto: item.id_producto,
+            cantidad: item.cantidad
+          };
+        });
+
+        const response = await fetch("http://localhost:3000/pedidos", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            id_cliente: usuario.id_usuario,
+            domicilio_entrega: usuario.direccion,
+            estado: "Pendiente",
+            repartidor: "A asignar",
+            productos: productos
+          })
+        });
+
+        const data = await response.json();
+
+        alert(
+          "Compra realizada con éxito\n" +
+          "Pedido #" + data.id_pedido +
+          "\nTotal: $" + data.total
+        );
+
+        localStorage.removeItem("dreammarket_carrito");
+        cargarCarritoEnPantalla();
+      }
+
 
       
     </script>
