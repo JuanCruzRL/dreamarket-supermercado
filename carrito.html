@@ -20,17 +20,25 @@
     <div class="container">
       <div class="columns">
         <div class="column">
-          <table class="table is-bordered is-fullwidth">
-            <thead class="has-background-black">
-              <th class="has-text-white has-text-centered">Imagen</th>
-              <th class="has-text-white has-text-centered">Producto</th>
-              <th class="has-text-white has-text-centered">Precio</th>
-              <th class="has-text-white has-text-centered">Cantidad</th>
-              <th class="has-text-white has-text-centered">Subtotal</th>
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+              </tr>
             </thead>
-            
+            <tbody id="carrito-body"></tbody>
           </table>
+          <p class="has-text-right" style="margin-top: 10px;">
+            Total: <strong id="carrito-total">$0</strong>
+          </p>
           <div class="has-text-centered mt-5">
+            <button class="button is-danger is-medium" style="margin-right:5px" onclick="vaciar_carrito()">
+              Vaciar carrito
+            </button>
             <button class="button is-primary is-medium">
               Finalizar compra
             </button>
@@ -111,8 +119,124 @@
         document.getElementById("footer-placeholder").innerHTML = html;
       }
       cargarFooter();
+      
+      function obtenerCarrito() {
+        const carritoGuardado = localStorage.getItem("dreammarket_carrito");
+        if (carritoGuardado === null) {
+          return [];
+        }
+        return JSON.parse(carritoGuardado);
+      }
 
+      const cuerpoTablaCarrito = document.getElementById("carrito-body");
+      const elementoTotalCarrito = document.getElementById("carrito-total");
 
+      function cargarCarritoEnPantalla() {
+        const carrito = obtenerCarrito();
+        cuerpoTablaCarrito.innerHTML = "";
+        let total = 0;
+
+        carrito.forEach(function (item) {
+          const subtotal = calcularSubtotalConDescuento(item);
+          total = total + subtotal;
+
+          cuerpoTablaCarrito.innerHTML += `
+            <tr>
+              <td><img src="${item.imagen}" style="width: 70px;"></td>
+              <td>${item.nombre} ${item.marca}</td>
+              <td>$${item.precioUnitario.toFixed ? item.precioUnitario.toFixed(0) : item.precioUnitario}</td>
+
+              <td>
+                <button onclick="disminuir_cantidad(${item.id_producto})" class="button cambiar-cantidad">-</button>
+                <span class="cantidad-valor">${item.cantidad}</span>
+                <button onclick="aumentar_cantidad(${item.id_producto})" class="button cambiar-cantidad">+</button>
+              </td>
+
+              <td>$${subtotal.toFixed(0)}</td>
+            </tr>
+          `;
+        });
+
+        elementoTotalCarrito.textContent = "$" + total.toFixed(0);
+      }
+
+      function guardarCarrito(carrito) {
+        localStorage.setItem("dreammarket_carrito", JSON.stringify(carrito));
+      }
+
+      function aumentar_cantidad(idProducto) {
+        const carrito = obtenerCarrito();
+        const indice = carrito.findIndex(function (item) {
+          return item.id_producto === idProducto;
+        });
+
+        carrito[indice].cantidad = carrito[indice].cantidad + 1;
+
+        guardarCarrito(carrito);
+        cargarCarritoEnPantalla();
+      }
+
+      const regexMultiplo = /^[0-9]+x[0-9]+$/i;
+
+      function calcularSubtotalConDescuento(item) {
+        const precioUnitario = Number(item.precioUnitario);
+        const cantidad = Number(item.cantidad);
+        const textoDescuento = (item.descuento || "").trim();
+
+        if (textoDescuento === "" || !regexMultiplo.test(textoDescuento)) {
+          return precioUnitario * cantidad;
+        }
+
+        const partes = textoDescuento.toLowerCase().split("x");
+        const cantidadLlevas = parseInt(partes[0], 10);
+        const cantidadPagas = parseInt(partes[1], 10);
+
+        if (isNaN(cantidadLlevas) || isNaN(cantidadPagas)) {
+          return precioUnitario * cantidad;
+        }
+
+        if (cantidadLlevas <= 0 || cantidadPagas <= 0) {
+          return precioUnitario * cantidad;
+        }
+
+        const gruposCompletos = Math.floor(cantidad / cantidadLlevas);
+        const unidadesxGrupo = gruposCompletos * cantidadPagas;
+
+        const resto = cantidad % cantidadLlevas;
+
+        const unidadesTotalesAPagar = unidadesxGrupo + resto;
+
+        return unidadesTotalesAPagar * precioUnitario;
+      }
+
+      function disminuir_cantidad(idProducto) {
+        const carrito = obtenerCarrito();
+
+        const indice = carrito.findIndex(function (item) {
+          return item.id_producto === idProducto;
+        });
+
+        if (indice === -1) {
+          return;
+        }
+
+        carrito[indice].cantidad = carrito[indice].cantidad - 1;
+
+        if (carrito[indice].cantidad <= 0) {
+          carrito.splice(indice, 1);
+        }
+
+        guardarCarrito(carrito);
+        cargarCarritoEnPantalla();
+      }
+
+      function vaciar_carrito (){
+        localStorage.removeItem("dreammarket_carrito");
+        cargarCarritoEnPantalla();
+      }
+      cargarCarritoEnPantalla();
+
+      
     </script>
   </body>
 </html>
