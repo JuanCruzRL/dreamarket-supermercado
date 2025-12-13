@@ -19,7 +19,7 @@ async function cargarNavbar() {
     }
 }
 cargarNavbar();
-const baseApiUrl = "http://localhost:3000/usuarios";
+const baseApiUrl = "https://dreamarket.onrender.com/usuarios";
 
 modalPerfil = document.getElementById("modal-perfil");
 modalBackground = modalPerfil.querySelector(".modal-background");
@@ -145,4 +145,111 @@ async function cerrar_sesion() {
     localStorage.removeItem("usuario_actual");
     cerrar_perfil();
     window.location.reload();
+}
+
+pedidoEditandoId = null;
+productosEditando = [];
+
+async function abrir_modal_pedidos() {
+  usuario = JSON.parse(localStorage.getItem("usuario_actual"));
+
+  response = await fetch("https://dreamarket.onrender.com/pedidos");
+  pedidos = await response.json();
+
+  pedidosUsuario = pedidos.filter(p => p.id_cliente === usuario.id_usuario);
+
+  cuerpo = document.getElementById("tabla-pedidos");
+  cuerpo.innerHTML = "";
+
+  pedidosUsuario.forEach(p => {
+    cuerpo.innerHTML += `
+      <tr>
+        <td>${p.id_pedido}</td>
+        <td>${new Date(p.fecha_creacion).toLocaleDateString()}</td>
+        <td>$${p.total}</td>
+        <td>${p.estado}</td>
+        <td>
+          <button class="button is-small is-warning"
+            onclick="editar_pedido(${p.id_pedido})">
+            Modificar
+          </button>
+          <button class="button is-small is-danger"
+            onclick="eliminar_pedido(${p.id_pedido})">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("modal-pedidos").classList.add("is-active");
+}
+
+function cerrar_modal_pedidos() {
+  document.getElementById("modal-pedidos").classList.remove("is-active");
+}
+
+async function eliminar_pedido(idPedido) {
+  confirmar = confirm("¿Eliminar este pedido?");
+  if (!confirmar) {
+    return;
+  }
+  
+  await fetch(`https://dreamarket.onrender.com/pedidos/${idPedido}`, {
+    method: "DELETE"
+  });
+
+  abrir_modal_pedidos();
+}
+
+async function editar_pedido(idPedido) {
+  response = await fetch(`https://dreamarket.onrender.com/pedidos/${idPedido}`);
+  pedido = await response.json();
+
+  pedidoEditandoId = idPedido;
+  productosEditando = pedido.productos;
+
+  contenedor = document.getElementById("contenedor-productos-pedido");
+  contenedor.innerHTML = "";
+
+  productosEditando.forEach((p, index) => {
+    contenedor.innerHTML += `
+      <div class="field is-grouped">
+        <div class="control">
+          <input class="input" value="${p.nombre}" disabled>
+        </div>
+        <div class="control">
+          <input class="input" type="number" min="1"
+            value="${p.cantidad}"
+            onchange="productosEditando[${index}].cantidad = Number(this.value)">
+        </div>
+      </div>
+    `;
+  });
+
+  document.getElementById("modal-editar-pedido").classList.add("is-active");
+}
+
+async function guardar_cambios_pedido() {
+  await fetch(`https://dreamarket.onrender.com/pedidos/${pedidoEditandoId}/productos`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      productos: productosEditando.map(p => ({
+        id_producto: p.id_producto,
+        cantidad: p.cantidad
+      }))
+    })
+  });
+
+  alert("Pedido actualizado");
+
+  cerrar_modal_editar();
+  abrir_modal_pedidos();
+}
+
+function cerrar_modal_editar() {
+  document.getElementById("modal-editar-pedido").classList.remove("is-active");
 }

@@ -82,3 +82,32 @@ export async function delete_order(id_pedido) {
 
   await pool.query("DELETE FROM pedidos WHERE id_pedido = $1", [id_pedido]);
 }
+
+export async function update_order_products(id_pedido, productos) {
+  let total = 0;
+
+  for (const producto of productos) {
+    const prod = await pool.query(
+      "SELECT precio FROM productos WHERE id_producto = $1",
+      [producto.id_producto]
+    );
+
+    const precio_unitario = prod.rows[0].precio;
+
+    await pool.query(
+      `UPDATE pedido_productos
+       SET cantidad = $1
+       WHERE id_pedido = $2 AND id_producto = $3`,
+      [producto.cantidad, id_pedido, producto.id_producto]
+    );
+
+    total += precio_unitario * producto.cantidad;
+  }
+
+  await pool.query(
+    `UPDATE pedidos SET total = $1 WHERE id_pedido = $2`,
+    [total, id_pedido]
+  );
+
+  return { id_pedido, total };
+}
