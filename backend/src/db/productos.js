@@ -1,12 +1,12 @@
-import db from "./db.js";
+import { pool } from "./db.js";
 
 export async function get_all_products() {
-    const response = await db.query("SELECT * FROM productos");
+    const response = await pool.query("SELECT * FROM productos");
     return response.rows;
 }
 
 export async function get_product(id_producto) {
-    const response = await db.query("SELECT * FROM productos WHERE id_producto = $1", [id_producto]);
+    const response = await pool.query("SELECT * FROM productos WHERE id_producto = $1", [id_producto]);
     if (response.rowCount === 0) {
         return undefined;
     }
@@ -15,7 +15,7 @@ export async function get_product(id_producto) {
 
 export async function create_product(nombre, marca, precio, stock, categoria, imagen, descuento) {
   try {
-    const result = await db.query(
+    const result = await pool.query(
       `INSERT INTO productos (nombre, marca, precio, stock, categoria, imagen, descuento)
        VALUES ($1, $2, $3, $4, $5, $6, $7)
        RETURNING id_producto, nombre, marca, precio, stock, categoria, imagen, descuento`,
@@ -28,7 +28,7 @@ export async function create_product(nombre, marca, precio, stock, categoria, im
 }
 
 export async function update_product(id_producto, nombre, marca, precio, stock, categoria, imagen, descuento) {
-    const response = await db.query(
+    const response = await pool.query(
         `UPDATE productos SET  nombre = $2, marca = $3, precio = $4, stock = $5, categoria = $6, imagen = $7, descuento = $8
         WHERE id_producto = $1
         RETURNING id_producto, nombre, marca, precio, stock, categoria, imagen, descuento`,
@@ -38,5 +38,5 @@ export async function update_product(id_producto, nombre, marca, precio, stock, 
 }
 
 export async function delete_product(id_producto) {
-    await db.query("DELETE FROM productos WHERE id_producto = $1", [id_producto]);
+    await pool.query("DELETE FROM productos WHERE id_producto = $1", [id_producto]);
 }

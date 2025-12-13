@@ -1,14 +1,14 @@
-import db from "./db.js";
+import { pool } from "./db.js";
 
 export async function get_all_users() {
-  const response = await db.query(
+  const response = await pool.query(
     "SELECT * FROM usuarios"
   );
   return response.rows;
 }
 
 export async function get_user(id_usuario) {
-  const response = await db.query(
+  const response = await pool.query(
     "SELECT * FROM usuarios WHERE id_usuario = $1",
     [id_usuario]
   );
@@ -19,7 +19,7 @@ export async function get_user(id_usuario) {
 }
 
 export async function update_user(email, nombre, apellido, telefono, direccion, contrasenia, id_usuario) {
-  const response = await db.query(
+  const response = await pool.query(
     `UPDATE usuarios
         SET email       = $1,
             nombre      = $2,
@@ -35,12 +35,12 @@ export async function update_user(email, nombre, apellido, telefono, direccion, 
 }
 
 export async function delete_user(id_usuario) {
-  await db.query("DELETE FROM usuarios WHERE id_usuario = $1", [id_usuario]);
+  await pool.query("DELETE FROM usuarios WHERE id_usuario = $1", [id_usuario]);
 }
 
 export async function create_user(email, nombre, apellido, telefono, direccion, contrasenia) {
   try {
-    const result = await db.query(
+    const result = await pool.query(
       `INSERT INTO usuarios (email, nombre, apellido, telefono, direccion, contrasenia)
        VALUES ($1, $2, $3, $4, $5, $6)
        RETURNING id_usuario, email, nombre, apellido, telefono, direccion`,
@@ -54,7 +54,7 @@ export async function create_user(email, nombre, apellido, telefono, direccion, 
 
 
 export async function get_user_by_email(email) {
-  const response = await db.query(
+  const response = await pool.query(
     "SELECT * FROM usuarios WHERE email = $1",
     [email]
   );

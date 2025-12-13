@@ -15,43 +15,7 @@
     <title>Dreamarket</title>
   </head>
   <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="logo" href="./index.html">
-          <img
-            src="imagenes/logo.png"
-            alt="Dreamarket"
-            width="112"
-            height="50"
-          />
-        </a>
-        <a
-          role="button"
-          class="navbar-burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarBasicExample"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <a class="button is-primary" href="./carrito.html">
-                <strong>Carrito 🛒</strong>
-              </a>
-              <a class="button is-light" href="./ingresar.html"> Ingresar👤 </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <div id="navbar-placeholder"></div>
     <br>
     <div class="container">
       <div class="columns">
@@ -83,7 +47,71 @@
       </div>
     </div>
     <br>
+
+    <div class="modal" id="modal-perfil">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Mi perfil</p>
+          <button class="delete" aria-label="close" id="btn-cerrar-modal"></button>
+        </header>
+        <section class="modal-card-body">
+          <div class="field">
+            <label class="label">E-mail</label>
+            <div class="control">
+              <input id="perfil-email" class="input" type="email" disabled>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Nombre</label>
+            <div class="control">
+              <input id="perfil-nombre" class="input" type="text">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Apellido</label>
+            <div class="control">
+              <input id="perfil-apellido" class="input" type="text">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Teléfono</label>
+            <div class="control">
+              <input id="perfil-telefono" class="input" type="text">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Dirección</label>
+            <div class="control">
+              <input id="perfil-direccion" class="input" type="text">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Contraseña</label>
+            <div class="control">
+              <input id="perfil-contrasenia" class="input" type="password"
+                placeholder="Escribí tu nueva contraseña">
+            </div>
+          </div>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-primary is-profile" id="btn-modificar-perfil"
+            onclick="modificar_usuario()">Modificar perfil</button>
+          <button class="button is-profile is-danger" id="btn-eliminar-cuenta" onclick="eliminar_cuenta()">Eliminar
+            cuenta</button>
+          <button class="button is-primary is-profile" id="btn-modificar-perfil" onclick="cerrar_sesion()">Cerrar
+            sesion</button>
+        </footer>
+      </div>
+    </div>
+
     <div id="footer-placeholder"></div>
+    <script src="./js/perfil.js"></script>
     <script>
       async function cargarFooter() {
         const respuesta = await fetch("./footer.html");

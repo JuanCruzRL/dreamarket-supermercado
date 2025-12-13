@@ -163,70 +163,70 @@
     </div>
   </section>
 
-  <div class="container">
-    <div class="columns is-centered" style="margin-bottom: 15px;">
-      <div class="column is-narrow">
-        <nav class="pagination" role="navigation">
-          <button class="pagination-previous" id="prevBtn">Anterior</button>
-          <ul class="pagination-list" id="paginacion"></ul>
-          <button class="pagination-next" id="nextBtn">Siguiente</button>
-        </nav>
-      </div>
+  <div class="modal" id="modal-perfil">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Mi perfil</p>
+        <button class="delete" aria-label="close" id="btn-cerrar-modal"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field">
+          <label class="label">E-mail</label>
+          <div class="control">
+            <input id="perfil-email" class="input" type="email" disabled>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Nombre</label>
+          <div class="control">
+            <input id="perfil-nombre" class="input" type="text">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Apellido</label>
+          <div class="control">
+            <input id="perfil-apellido" class="input" type="text">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Teléfono</label>
+          <div class="control">
+            <input id="perfil-telefono" class="input" type="text">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Dirección</label>
+          <div class="control">
+            <input id="perfil-direccion" class="input" type="text">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Contraseña</label>
+          <div class="control">
+            <input id="perfil-contrasenia" class="input" type="password"
+              placeholder="Escribí tu nueva contraseña">
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-primary is-profile" id="btn-modificar-perfil"
+          onclick="modificar_usuario()">Modificar perfil</button>
+        <button class="button is-profile is-danger" id="btn-eliminar-cuenta" onclick="eliminar_cuenta()">Eliminar
+          cuenta</button>
+        <button class="button is-primary is-profile" id="btn-modificar-perfil" onclick="cerrar_sesion()">Cerrar
+          sesion</button>
+      </footer>
     </div>
   </div>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-3">
-          <p class="title is-6 mb-3">Dreammarket</p>
-          <p class="is-size-7">
-            Tu supermercado online: frescos, almacén, limpieza y más, con
-            entrega rápida y segura.
-          </p>
-        </div>
-        <div class="column is-3">
-          <p class="title is-6 mb-3">Ayuda</p>
-          <ul class="is-size-7">
-            <li><a href="/envios.html">Envíos y horarios</a></li>
-            <li><a href="/devoluciones.html">Devoluciones</a></li>
-            <li>
-              <a href="/preguntas-frecuentes.html">Preguntas frecuentes</a>
-            </li>
-            <li><a href="/contacto.html">Contacto</a></li>
-          </ul>
-        </div>
-        <div class="column is-3">
-          <p class="title is-6 mb-3">Medios de pago</p>
-          <ul class="is-size-7">
-            <li>Tarjetas de crédito y débito</li>
-            <li>Transferencia / depósito</li>
-            <li>Mercado Pago</li>
-          </ul>
-        </div>
-        <div class="column is-3">
-          <p class="title is-6 mb-3">Contacto</p>
-          <p class="is-size-7">
-            WhatsApp:
-            <a href="https://wa.me/5491112345678">+54 9 11 1234-5678</a><br />
-            Email:
-            <a href="mailto:hola@dreammarket.com">hola@dreammarket.com</a>
-          </p>
-
-          <p class="title is-6 mb-2 mt-4">Seguinos</p>
-          <div class="buttons">
-            <a class="button is-small is-light" href="#" target="_blank">Instagram</a>
-            <a class="button is-small is-light" href="#" target="_blank">Facebook</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="has-text-centered is-size-7 mt-5">
-        © 2025 Dreammarket · Todos los derechos reservados
-      </div>
-    </div>
-  </footer>
-
+  <div id="footer-placeholder"></div>
+  <script src="./js/perfil.js"></script>
   <script>
     async function cargarFooter() {
         const respuesta = await fetch("./footer.html");
@@ -234,12 +234,6 @@
         document.getElementById("footer-placeholder").innerHTML = html;
       }
       cargarFooter();
-      async function cargarNavbar() {
-        const respuesta = await fetch("./navbar.html");
-        const html = await respuesta.text();
-        document.getElementById("navbar-placeholder").innerHTML = html;
-      }
-      cargarNavbar();
 
     const url_productos = "http://localhost:3000/productos";
     const regex_porcentaje = /^[0-9]+%$/;
