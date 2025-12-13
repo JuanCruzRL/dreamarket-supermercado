@@ -1,5 +1,5 @@
 import express from "express";
-import { get_all_orders, get_order, create_order, update_order, delete_order} from "./db/pedidos.js";
+import { get_all_orders, get_order, create_order, update_order, delete_order, update_order_products} from "./db/pedidos.js";
 
 const router = express.Router();
 
@@ -57,6 +57,18 @@ router.put("/:id", async (req, res) => {
   }
 
   res.status(200).json(pedido);
+});
+
+router.put("/:id/productos", async (req, res) => {
+  const id_pedido = req.params.id;
+  if (!get_order(id_pedido)){
+    return res.status(404).send("No se encontro el pedido");
+  }
+  const { productos } = req.body;
+
+  const resultado = await update_order_products(id_pedido, productos);
+
+  return res.status(200).json(resultado);
 });
 
 router.delete("/:id", async (req, res) => {
