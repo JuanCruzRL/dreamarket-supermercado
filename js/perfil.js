@@ -19,7 +19,7 @@ async function cargarNavbar() {
     }
 }
 cargarNavbar();
-const baseApiUrl = "http://localhost:3000/usuarios";
+const baseApiUrl = "https://dreamarket.onrender.com/usuarios";
 
 modalPerfil = document.getElementById("modal-perfil");
 modalBackground = modalPerfil.querySelector(".modal-background");
@@ -153,7 +153,7 @@ productosEditando = [];
 async function abrir_modal_pedidos() {
   usuario = JSON.parse(localStorage.getItem("usuario_actual"));
 
-  response = await fetch("http://localhost:3000/pedidos");
+  response = await fetch("https://dreamarket.onrender.com/pedidos");
   pedidos = await response.json();
 
   pedidosUsuario = pedidos.filter(p => p.id_cliente === usuario.id_usuario);
@@ -195,7 +195,7 @@ async function eliminar_pedido(idPedido) {
     return;
   }
   
-  await fetch(`http://localhost:3000/pedidos/${idPedido}`, {
+  await fetch(`https://dreamarket.onrender.com/pedidos/${idPedido}`, {
     method: "DELETE"
   });
 
@@ -203,7 +203,7 @@ async function eliminar_pedido(idPedido) {
 }
 
 async function editar_pedido(idPedido) {
-  response = await fetch(`http://localhost:3000/pedidos/${idPedido}`);
+  response = await fetch(`https://dreamarket.onrender.com/pedidos/${idPedido}`);
   pedido = await response.json();
 
   pedidoEditandoId = idPedido;
@@ -231,7 +231,7 @@ async function editar_pedido(idPedido) {
 }
 
 async function guardar_cambios_pedido() {
-  await fetch(`http://localhost:3000/pedidos/${pedidoEditandoId}/productos`, {
+  await fetch(`https://dreamarket.onrender.com/pedidos/${pedidoEditandoId}/productos`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
