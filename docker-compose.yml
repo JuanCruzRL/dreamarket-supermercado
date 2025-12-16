@@ -1,4 +1,16 @@
 services:
+  db:
+    image: postgres:17
+    container_name: dreamarket-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dreamarket_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.volumes/postgres/data:/var/lib/postgresql/data/
+
   backend:
     build: ./backend
     ports:
