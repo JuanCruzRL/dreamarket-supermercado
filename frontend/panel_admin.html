@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+    <title>Dreamarket Admin</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <a class="navbar-item">
+          <span class="is-size-5 has-text-weight-bold">DREAMARKET ADMIN</span>
+        </a>
+      </div>
+
+      <div class="navbar-menu">
+        
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary" href="./index.html">
+                <strong>Inicio 🏠</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section class="section">
+      <div class="container">
+        <h1 class="title is-2">Gestión de Productos</h1>
+        <div class="level">
+          <div class="level-left">
+            <p class="subtitle is-5">Listado de productos activos</p>
+          </div>
+          <div class="level-right">
+            <button id="btn-nuevo-producto" class="button is-primary dm-btn">
+              <span style="font-size: 25px; margin-right: 10px">+</span>
+              Crear Nuevo Producto
+            </button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="table is-fullwidth is-striped is-hoverable is-bordered">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Marca</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Categoría</th>
+                <th>Descuentos</th>
+                <th>Imagen</th>
+                <th class="has-text-centered">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-productos">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <script>
+      const api_url = "https://dreamarket.onrender.com/productos";
+      function cargarProductos() {
+        fetch(api_url)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Productos desde la API:", data);
+          const tbody = document.getElementById("tabla-productos");
+          tbody.innerHTML = "";
+          data.forEach((producto) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${producto.id_producto}</td>
+              <td>${producto.nombre}</td>
+              <td>${producto.marca}</td>
+              <td>${producto.precio}</td>
+              <td>${producto.stock}</td>
+              <td>${producto.categoria}</td>
+              <td>${producto.descuento || "-"}</td>
+              <td>${producto.imagen ? `<img src="${producto.imagen}" alt="${producto.nombre}" style="max-width: 64px; max-height: 64px; object-fit: cover;">`: "-"}</td>
+              <td>
+                <button class="button is-small is-info mr-2" data-id="${producto.id_producto}" data-action="edit">
+                  Editar ✏️
+                </button>
+                <button class="button is-small is-danger" data-id="${producto.id_producto}" data-action="delete">
+                  Eliminar 🗑️
+                </button>
+              </td>
+              `;
+            tbody.appendChild(tr);
+          })
+        });
+      }
+      cargarProductos();
+      const tbody = document.getElementById("tabla-productos");
+
+      tbody.addEventListener("click", async (event) => {
+        const btn = event.target.closest("button");
+        if (!btn) return;
+
+        const id = btn.dataset.id;
+        const action = btn.dataset.action;
+        if (action == "delete"){
+          await fetch(`${api_url}/${id}`, { method: "DELETE" });
+          cargarProductos();
+        }
+        if (action === "edit") {
+          const resultado = await fetch(`${api_url}/${id}`);
+          const producto = await resultado.json();
+
+          const nuevoNombre = prompt("Nombre:", producto.nombre);
+          if (!nuevoNombre) return;
+
+          const nuevaMarca = prompt("Marca:", producto.marca);
+          if (!nuevaMarca) return;
+
+          const nuevoPrecio = prompt("Precio:", producto.precio);
+          if (!nuevoPrecio) return;
+
+          const nuevoStock = prompt("Stock:", producto.stock);
+          if (!nuevoStock) return;
+
+          const nuevaCategoria = prompt("Categoría:", producto.categoria);
+          if (!nuevaCategoria) return;
+
+          const nuevoDescuento =
+            prompt("Descuento:", producto.descuento || "-") || null;
+
+          const nuevaImagen =
+            prompt("URL imagen:", producto.imagen || "-") || null;
+
+          const body = {
+            nombre: nuevoNombre,
+            marca: nuevaMarca,
+            precio: nuevoPrecio,
+            stock: nuevoStock,
+            categoria: nuevaCategoria,
+            descuento: nuevoDescuento,
+            imagen: nuevaImagen,
+          };
+
+          await fetch(`${api_url}/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+
+          cargarProductos();
+        }
+      });
+      function crearProducto() {
+        const nombre = prompt("Nombre del producto:");
+        if (!nombre) return;
+
+        const marca = prompt("Marca:");
+        if (!marca) return;
+
+        const precio = prompt("Precio:");
+        if (!precio) return;
+
+        const stock = prompt("Stock:");
+        if (!stock) return;
+
+        const categoria = prompt("Categoría:");
+        if (!categoria) return;
+
+        const descuento =
+          prompt("Descuento (ej: '10% OFF' o vacío si no tiene):") || null;
+
+        const imagen =
+          prompt("URL de la imagen (opcional):") || null;
+
+        const body = {
+          nombre,
+          marca,
+          precio,
+          stock,
+          categoria,
+          descuento,
+          imagen,
+        };
+
+        fetch(api_url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        })
+        .then((res) => {
+          console.log("Respuesta POST /productos:", res.status);
+          return res.json();
+        })
+        .then((nuevo) => {
+          console.log("Producto creado:", nuevo);
+          cargarProductos();
+        })
+      }
+      const btnNuevo = document.getElementById("btn-nuevo-producto");
+      btnNuevo.addEventListener("click", crearProducto);
+  </script>
+</body>
+</html>

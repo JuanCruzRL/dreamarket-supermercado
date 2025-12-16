@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <title>Dreamarket</title>
+  </head>
+  <body>
+    <div id="navbar-placeholder"></div>
+    <br>
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="carrito-body"></tbody>
+          </table>
+          <p class="has-text-right" style="margin-top: 10px;">
+            Total: <strong id="carrito-total">$0</strong>
+          </p>
+          <div class="has-text-centered mt-5">
+            <button class="button is-danger is-medium" style="margin-right:5px" onclick="vaciar_carrito()">
+              Vaciar carrito
+            </button>
+            <button class="button is-primary is-medium" onclick="finalizarCompra()">
+              Finalizar compra
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div class="modal" id="modal-perfil">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Mi perfil</p>
+          <button class="delete" aria-label="close" id="btn-cerrar-modal"></button>
+        </header>
+        <section class="modal-card-body">
+          <div class="field">
+            <label class="label">E-mail</label>
+            <div class="control">
+              <input id="perfil-email" class="input" type="email" disabled>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Nombre</label>
+            <div class="control">
+              <input id="perfil-nombre" class="input" type="text">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Apellido</label>
+            <div class="control">
+              <input id="perfil-apellido" class="input" type="text">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Teléfono</label>
+            <div class="control">
+              <input id="perfil-telefono" class="input" type="text">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Dirección</label>
+            <div class="control">
+              <input id="perfil-direccion" class="input" type="text">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Contraseña</label>
+            <div class="control">
+              <input id="perfil-contrasenia" class="input" type="password"
+                placeholder="Escribí tu nueva contraseña">
+            </div>
+          </div>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-primary is-profile" id="btn-modificar-perfil"
+            onclick="modificar_usuario()">Modificar perfil</button>
+          <button class="button is-profile is-danger" id="btn-eliminar-cuenta" onclick="eliminar_cuenta()">Eliminar
+            cuenta</button>
+          <button class="button is-primary is-profile" id="btn-modificar-perfil" onclick="cerrar_sesion()">Cerrar
+            sesion</button>
+        </footer>
+      </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="./js/perfil.js"></script>
+    <script>
+      async function cargarFooter() {
+        const respuesta = await fetch("./footer.html");
+        const html = await respuesta.text();
+        document.getElementById("footer-placeholder").innerHTML = html;
+      }
+      cargarFooter();
+      
+      function obtenerCarrito() {
+        const carritoGuardado = localStorage.getItem("dreammarket_carrito");
+        if (carritoGuardado === null) {
+          return [];
+        }
+        return JSON.parse(carritoGuardado);
+      }
+
+      const cuerpoTablaCarrito = document.getElementById("carrito-body");
+      const elementoTotalCarrito = document.getElementById("carrito-total");
+
+      function cargarCarritoEnPantalla() {
+        const carrito = obtenerCarrito();
+        cuerpoTablaCarrito.innerHTML = "";
+        let total = 0;
+
+        carrito.forEach(function (item) {
+          const subtotal = calcularSubtotalConDescuento(item);
+          total = total + subtotal;
+
+          cuerpoTablaCarrito.innerHTML += `
+            <tr>
+              <td><img src="${item.imagen}" style="width: 70px;"></td>
+              <td>${item.nombre} ${item.marca}</td>
+              <td>$${item.precioUnitario.toFixed ? item.precioUnitario.toFixed(0) : item.precioUnitario}</td>
+
+              <td>
+                <button onclick="disminuir_cantidad(${item.id_producto})" class="button cambiar-cantidad">-</button>
+                <span class="cantidad-valor">${item.cantidad}</span>
+                <button onclick="aumentar_cantidad(${item.id_producto})" class="button cambiar-cantidad">+</button>
+              </td>
+
+              <td>$${subtotal.toFixed(0)}</td>
+            </tr>
+          `;
+        });
+
+        elementoTotalCarrito.textContent = "$" + total.toFixed(0);
+      }
+
+      function guardarCarrito(carrito) {
+        localStorage.setItem("dreammarket_carrito", JSON.stringify(carrito));
+      }
+
+      function aumentar_cantidad(idProducto) {
+        const carrito = obtenerCarrito();
+        const indice = carrito.findIndex(function (item) {
+          return item.id_producto === idProducto;
+        });
+
+        carrito[indice].cantidad = carrito[indice].cantidad + 1;
+
+        guardarCarrito(carrito);
+        cargarCarritoEnPantalla();
+      }
+
+      const regexMultiplo = /^[0-9]+x[0-9]+$/i;
+
+      function calcularSubtotalConDescuento(item) {
+        const precioUnitario = Number(item.precioUnitario);
+        const cantidad = Number(item.cantidad);
+        const textoDescuento = (item.descuento || "").trim();
+
+        if (textoDescuento === "" || !regexMultiplo.test(textoDescuento)) {
+          return precioUnitario * cantidad;
+        }
+
+        const partes = textoDescuento.toLowerCase().split("x");
+        const cantidadLlevas = parseInt(partes[0], 10);
+        const cantidadPagas = parseInt(partes[1], 10);
+
+        if (isNaN(cantidadLlevas) || isNaN(cantidadPagas)) {
+          return precioUnitario * cantidad;
+        }
+
+        if (cantidadLlevas <= 0 || cantidadPagas <= 0) {
+          return precioUnitario * cantidad;
+        }
+
+        const gruposCompletos = Math.floor(cantidad / cantidadLlevas);
+        const unidadesxGrupo = gruposCompletos * cantidadPagas;
+
+        const resto = cantidad % cantidadLlevas;
+
+        const unidadesTotalesAPagar = unidadesxGrupo + resto;
+
+        return unidadesTotalesAPagar * precioUnitario;
+      }
+
+      function disminuir_cantidad(idProducto) {
+        const carrito = obtenerCarrito();
+
+        const indice = carrito.findIndex(function (item) {
+          return item.id_producto === idProducto;
+        });
+
+        if (indice === -1) {
+          return;
+        }
+
+        carrito[indice].cantidad = carrito[indice].cantidad - 1;
+
+        if (carrito[indice].cantidad <= 0) {
+          carrito.splice(indice, 1);
+        }
+
+        guardarCarrito(carrito);
+        cargarCarritoEnPantalla();
+      }
+
+      function vaciar_carrito (){
+        localStorage.removeItem("dreammarket_carrito");
+        cargarCarritoEnPantalla();
+      }
+      cargarCarritoEnPantalla();
+      async function finalizarCompra() {
+        const carrito = obtenerCarrito();
+
+        if (carrito.length === 0) {
+          alert("El carrito está vacío");
+          return;
+        }
+
+        const usuarioJSON = localStorage.getItem("usuario_actual");
+
+        if (!usuarioJSON) {
+          alert("Tenés que iniciar sesión para finalizar la compra");
+          window.location.href = "./ingresar.html";
+          return;
+        }
+
+        const usuario = JSON.parse(usuarioJSON);
+
+        
+
+        const productos = carrito.map(function (item) {
+          return {
+            id_producto: item.id_producto,
+            cantidad: item.cantidad
+          };
+        });
+
+        const response = await fetch("https://dreamarket.onrender.com/pedidos", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            id_cliente: usuario.id_usuario,
+            domicilio_entrega: usuario.direccion,
+            estado: "Pendiente",
+            repartidor: "A asignar",
+            productos: productos
+          })
+        });
+
+        const data = await response.json();
+
+        alert(
+          "Compra realizada con éxito\n" +
+          "Pedido #" + data.id_pedido +
+          "\nTotal: $" + data.total
+        );
+
+        localStorage.removeItem("dreammarket_carrito");
+        cargarCarritoEnPantalla();
+      }
+
+
+      
+    </script>
+  </body>
+</html>

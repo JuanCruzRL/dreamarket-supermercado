@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <title>Productos</title>
+</head>
+
+<body>
+  <div id="navbar-placeholder"></div>
+  <div class="container">
+    <div class="has-text-centered">
+      <div class="field has-addons is-justify-content-center" style="max-width: 400px; margin: 0 auto;">
+        <div class="control is-expanded">
+          <input id="input_busqueda" class="input" type="text" placeholder="Buscar productos...">
+        </div>
+        <div class="control">
+          <button id="boton_busqueda" class="button is-primary" onclick="hacer_busqueda()">
+            Buscar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-3" style="margin-left: -200px; margin-right: 30px;">
+          <div class="box dm-filter">
+            <h1 class="subtitle" style="color: #1976D2;">FILTRAR POR:</h1>
+            <aside class="menu">
+              <p class="menu-label">Categoría</p>
+              <ul class="menu-list">
+                <li>
+                  <div class="dropdown is-hoverable is-right">
+                    <div class="dropdown-trigger">
+                      <button class="menu-list menu-productos">Almacén</button>
+                    </div>
+                    <div class="dropdown-menu menu-productos" role="menu">
+                      <div class="dropdown-content">
+                        <a class="dropdown-item" onclick="filtrar('categoria','Golosinas')">Golosinas</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Snacks')">Snacks</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Mermeladas y dulces')">Mermeladas y
+                          dulces</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Conservas y enlatados')">Conservas y
+                          enlatados</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Panadería')">Panadería</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Aceites y condimentos')">Aceites y
+                          condimentos</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Galletitas')">Galletitas</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Harinas y pastas')">Harinas y pastas</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="dropdown is-hoverable is-right">
+                    <div class="dropdown-trigger">
+                      <button class="menu-list menu-productos">Bebidas</button>
+                    </div>
+                    <div class="dropdown-menu menu-productos" role="menu">
+                      <div class="dropdown-content">
+                        <a class="dropdown-item" onclick="filtrar('categoria','Bebidas sin alcohol')">Bebidas sin
+                          alcohol</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Bebidas alcohólicas')">Bebidas
+                          alcohólicas</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Infusiones')">Infusiones</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="dropdown is-hoverable is-right">
+                    <div class="dropdown-trigger">
+                      <button class="menu-list menu-productos">Congelados</button>
+                    </div>
+                    <div class="dropdown-menu menu-productos" role="menu">
+                      <div class="dropdown-content">
+                        <a class="dropdown-item" onclick="filtrar('categoria','Verduras congeladas')">Verduras
+                          congeladas</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Hamburguesas')">Hamburguesas</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Frutas congeladas')">Frutas
+                          congeladas</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Papas fritas')">Papas fritas</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Helados')">Helados</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="dropdown is-hoverable is-right">
+                    <div class="dropdown-trigger">
+                      <button class="menu-list menu-productos">Limpieza</button>
+                    </div>
+                    <div class="dropdown-menu menu-productos" role="menu">
+                      <div class="dropdown-content">
+                        <a class="dropdown-item" onclick="filtrar('categoria','Detergentes')">Detergentes</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Lavandina')">Lavandina</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Escobas y trapos')">Escobas y trapos</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Desinfectantes')">Desinfectantes</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Suavizantes')">Suavizantes</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="dropdown is-hoverable is-right">
+                    <div class="dropdown-trigger">
+                      <button class="menu-list menu-productos">Carnes</button>
+                    </div>
+                    <div class="dropdown-menu menu-productos" role="menu">
+                      <div class="dropdown-content">
+                        <a class="dropdown-item" onclick="filtrar('categoria','Carne vacuna')">Carne vacuna</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Cerdo')">Cerdo</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Embutidos')">Embutidos</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Pescado')">Pescado</a>
+                        <a class="dropdown-item" onclick="filtrar('categoria','Pollo')">Pollo</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+
+              <p class="menu-label mt-4">Ofertas</p>
+              <ul class="menu-list">
+                <li><a onclick="filtrar('descuento','10%')">10% OFF</a></li>
+                <li><a onclick="filtrar('descuento','20%')">20% OFF</a></li>
+                <li><a onclick="filtrar('descuento','30%')">30% OFF</a></li>
+                <li><a onclick="filtrar('descuento','40%')">40% OFF</a></li>
+                <li><a onclick="filtrar('descuento','50%')">50% OFF</a></li>
+                <li><a onclick="filtrar('descuento','Dreamweek')">Dreamweek!</a></li>
+                <li><a onclick="filtrar('descuento','2x1')">2x1</a></li>
+                <li><a onclick="filtrar('descuento','3x2')">3x2</a></li>
+
+                <li><a style="color:red" onclick="borrar_filtros()">❌ Eliminar filtros</a></li>
+              </ul>
+            </aside>
+
+          </div>
+        </div>
+
+        <div class="column is-9">
+          <div id="contenedor_productos" class="columns is-multiline is-centered">
+          </div>
+        </div>
+
+        <div class="column is-3" style="margin-left: 40px;">
+          <figure class="image">
+            <img src="./imagenes/banner_vertical.jpg">
+          </figure>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <div class="modal" id="modal-perfil">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Mi perfil</p>
+        <button class="delete" aria-label="close" id="btn-cerrar-modal"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field">
+          <label class="label">E-mail</label>
+          <div class="control">
+            <input id="perfil-email" class="input" type="email" disabled>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Nombre</label>
+          <div class="control">
+            <input id="perfil-nombre" class="input" type="text">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Apellido</label>
+          <div class="control">
+            <input id="perfil-apellido" class="input" type="text">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Teléfono</label>
+          <div class="control">
+            <input id="perfil-telefono" class="input" type="text">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Dirección</label>
+          <div class="control">
+            <input id="perfil-direccion" class="input" type="text">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Contraseña</label>
+          <div class="control">
+            <input id="perfil-contrasenia" class="input" type="password"
+              placeholder="Escribí tu nueva contraseña">
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-primary is-profile" id="btn-modificar-perfil"
+          onclick="modificar_usuario()">Modificar perfil</button>
+        <button class="button is-profile is-danger" id="btn-eliminar-cuenta" onclick="eliminar_cuenta()">Eliminar
+          cuenta</button>
+        <button class="button is-primary is-profile" id="btn-modificar-perfil" onclick="cerrar_sesion()">Cerrar
+          sesion</button>
+      </footer>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+  <script src="./js/perfil.js"></script>
+  <script>
+    async function cargarFooter() {
+        const respuesta = await fetch("./footer.html");
+        const html = await respuesta.text();
+        document.getElementById("footer-placeholder").innerHTML = html;
+      }
+      cargarFooter();
+
+    const url_productos = "https://dreamarket.onrender.com/productos";
+    const regex_porcentaje = /^[0-9]+%$/;
+    const regex_multiplo = /^[0-9]+x[0-9]+$/i;
+    const regex_dreamweek = /dreamweek/i;
+
+    const params = window.location.search;
+    fetch(url_productos + params).then((response) => {
+        return response.json();
+      }).then(data => {
+        const contenedor = document.getElementById("contenedor_productos");
+
+        data.forEach(producto => {
+          const descuento = (producto.descuento || "").trim();
+
+          let tipo = "ninguno";
+          let num_descuento = 0;
+          let tags_html = "";
+
+          if (regex_porcentaje.test(descuento)) {
+            tipo = "porcentaje";
+            num_descuento = parseInt(descuento.replace("%", ""));
+            tags_html = `<span class="tag is-danger is-light" style="margin-top:5px">${num_descuento}% OFF</span>`;
+          }
+          else if (regex_multiplo.test(descuento)) {
+            tipo = "multiplo";
+            tags_html = `<span class="tag is-danger is-light" style="margin-top:5px">${descuento}</span>`;
+          }
+          else if (regex_dreamweek.test(descuento)) {
+            tipo = "texto";
+            if (descuento.toLowerCase() === "dreamweek") {
+              num_descuento = 50;
+
+              tags_html = `
+                <span class="tag dreamweek-tag" style="margin-top:5px">Dreamweek!</span>
+                <span class="tag is-danger is-light" style="margin-top:5px">50% OFF</span>
+              `;
+            } else {
+              tags_html = `<span class="tag is-danger is-light" style="margin-top:5px">${descuento}</span>`;
+            }
+          }
+
+          const precio_final = producto.precio - (producto.precio * num_descuento / 100);
+
+          let precio_original_html = "";
+          let precio_final_html = "";
+
+          if (num_descuento > 0) {
+            precio_original_html = `<s>$${producto.precio}</s>`;
+            precio_final_html = `$${precio_final.toFixed(0)}`;
+          } else {
+            precio_final_html = `$${producto.precio}`;
+          }
+
+          contenedor.innerHTML += `
+              <div class="column is-one-quarter">
+                <div class="card pag-productos">
+
+                  <div class="card-image">
+                    <figure class="image is-4by3">
+                      <img src="${producto.imagen}">
+                    </figure>
+                  </div>
+
+                  <div class="card-content has-text-centered">
+                    <p class="title is-6">${producto.nombre} ${producto.marca}</p>
+
+                    <p class="subtitle is-6">
+                      ${precio_original_html}
+                      <strong>${precio_final_html}</strong><br>
+                      ${tags_html}
+                    </p>
+
+                    <button
+                      class="button is-danger is-small btn-agregar-carrito"
+                      onclick="clickAgregarProducto(this)"
+                      data-id-producto="${producto.id_producto}"
+                      data-nombre="${producto.nombre}"
+                      data-marca="${producto.marca}"
+                      data-precio="${precio_final}"
+                      data-imagen="${producto.imagen}"
+                      data-descuento="${producto.descuento || ""}">
+                      Agregar
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            `;
+
+        });
+      });
+
+    function filtrar(tipo, valor) {
+      const url = new URL(document.URL);
+      url.searchParams.set(tipo, valor);
+
+      location.href = url.toString();
+    }
+
+    function borrar_filtros() {
+      location.href = location.pathname;
+    }
+
+    function hacer_busqueda() {
+      const input_busqueda = document.getElementById("input_busqueda");
+      const texto_buscado = input_busqueda.value.trim();
+      const url = new URL(document.URL);
+
+      if (texto_buscado === "") {
+        url.searchParams.delete("nombre");
+      } else {
+        url.searchParams.set("nombre", texto_buscado);
+      }
+
+      location.href = url.toString();
+    }
+
+    const contenedorProductos = document.getElementById("contenedor_productos");
+
+    function obtenerCarrito() {
+      const carritoGuardado = localStorage.getItem("dreammarket_carrito");
+      if (carritoGuardado === null) {
+        
+        return [];
+      }
+      return JSON.parse(carritoGuardado);
+    }
+
+    function guardarCarrito(carrito) {
+      localStorage.setItem("dreammarket_carrito", JSON.stringify(carrito));
+    }
+
+    function agregarProductoAlCarrito(productoParaAgregar) {
+      const carritoActual = obtenerCarrito();
+      console.log("LLAMADA A LA FUNCION A VER SI FUNCA");
+      
+      const indiceExistente = carritoActual.findIndex(function (item) {
+        return item.id_producto === productoParaAgregar.id_producto;
+      });
+
+      if (indiceExistente !== -1) {
+        carritoActual[indiceExistente].cantidad += 1;
+      } else {
+        productoParaAgregar.cantidad = 1;
+        carritoActual.push(productoParaAgregar);
+      }
+
+      guardarCarrito(carritoActual);
+    }
+
+    
+    function clickAgregarProducto(boton) {
+      const productoParaAgregar = {
+        id_producto: Number(boton.dataset.idProducto),
+        nombre: boton.dataset.nombre,
+        marca: boton.dataset.marca,
+        imagen: boton.dataset.imagen,
+        precioUnitario: Number(boton.dataset.precio),
+        descuento: boton.dataset.descuento || ""
+      };
+      agregarProductoAlCarrito(productoParaAgregar);
+    }
+
+  </script>
+
+
+
+</body>
+
+</html>

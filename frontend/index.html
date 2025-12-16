@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <title>Dreamarket</title>
+</head>
+
+<body>
+  <div id="navbar-placeholder"></div>
+  <section class="section">
+    <div class="container">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <figure class="image is-16by7">
+              <img src="imagenes/carne.png">
+            </figure>
+          </div>
+          <div class="swiper-slide">
+            <figure class="image is-16by7">
+              <img src="imagenes/congelados2.png">
+            </figure>
+          </div>
+          <div class="swiper-slide">
+            <figure class="image is-16by7">
+              <img src="imagenes/frutas.png">
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    new Swiper('.swiper', {
+      loop: true,
+      autoplay: { delay: 3000 }
+    });
+  </script>
+
+  <section class="section pt-0">
+    <div class="container">
+      <h2 class="title is-5">Comprá por categoría</h2>
+
+      <div class="columns is-multiline">
+
+        <div class="column is-6-tablet is-3-desktop">
+          <div class="box is-flex is-align-items-center is-justify-content-space-between">
+            <div>
+              <p class="title is-6 mb-2">Verduleria</p>
+              <a class="button is-small is-primary" href="./productos.html">Ir</a>
+            </div>
+            <figure class="image is-128x128">
+              <img src="imagenes/bananas.jpeg" loading="lazy">
+            </figure>
+          </div>
+        </div>
+
+        <div class="column is-6-tablet is-3-desktop">
+          <div class="box is-flex is-align-items-center is-justify-content-space-between">
+            <div>
+              <p class="title is-6 mb-2">Congelados</p>
+              <a class="button is-small is-primary" href="./productos.html">Ir</a>
+            </div>
+            <figure class="image is-128x128">
+              <img src="imagenes/congelados.png" loading="lazy">
+            </figure>
+          </div>
+        </div>
+
+        <div class="column is-6-tablet is-3-desktop">
+          <div class="box is-flex is-align-items-center is-justify-content-space-between">
+            <div>
+              <p class="title is-6 mb-2">Carnes</p>
+              <a class="button is-small is-primary" href="./productos.html">Ir</a>
+            </div>
+            <figure class="image is-128x128">
+              <img src="imagenes/carne.jpg" loading="lazy">
+            </figure>
+          </div>
+        </div>
+
+        <div class="column is-6-tablet is-3-desktop">
+          <div class="box is-flex is-align-items-center is-justify-content-space-between">
+            <div>
+              <p class="title is-6 mb-2">Almacen</p>
+              <a class="button is-small is-primary" href="./productos.html">Ir</a>
+            </div>
+            <figure class="image is-128x128">
+              <img src="imagenes/galletas.jpg" loading="lazy">
+            </figure>
+          </div>
+        </div>
+
+        <div class="column is-6-tablet is-3-desktop">
+          <div class="box is-flex is-align-items-center is-justify-content-space-between">
+            <div>
+              <p class="title is-6 mb-2">Limpieza</p>
+              <a class="button is-small is-primary" href="./productos.html">Ir</a>
+            </div>
+            <figure class="image is-128x128">
+              <img src="imagenes/limpieza.png" loading="lazy">
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section pt-0">
+    <div class="container">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-16by7">
+            <img src="imagenes/dreamweek.png" alt="Dreamweek - 7 días de descuentos">
+          </figure>
+        </div>
+        <div class="card-content has-text-centered">
+          <p class="title is-4 mb-2">Dreamweek</p>
+          <p class="subtitle is-6">¡7 días de descuentos imperdibles!</p>
+          <a href="./descuentos.html#Dreamweek" class="button is-primary is-medium">
+            Ir a descuentos
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal" id="modal-perfil">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Mi perfil</p>
+        <button class="delete" aria-label="close" id="btn-cerrar-modal"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field">
+          <label class="label">E-mail</label>
+          <div class="control">
+            <input id="perfil-email" class="input" type="email" disabled>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Nombre</label>
+          <div class="control">
+            <input id="perfil-nombre" class="input" type="text">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Apellido</label>
+          <div class="control">
+            <input id="perfil-apellido" class="input" type="text">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Teléfono</label>
+          <div class="control">
+            <input id="perfil-telefono" class="input" type="text">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Dirección</label>
+          <div class="control">
+            <input id="perfil-direccion" class="input" type="text">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Contraseña</label>
+          <div class="control">
+            <input id="perfil-contrasenia" class="input" type="password" placeholder="Escribí tu nueva contraseña">
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-primary is-profile" id="btn-modificar-perfil" onclick="modificar_usuario()">Modificar
+          perfil</button>
+        <button class="button is-profile is-danger" id="btn-eliminar-cuenta" onclick="eliminar_cuenta()">Eliminar
+          cuenta</button>
+        <button class="button is-primary is-profile" id="btn-modificar-perfil" onclick="cerrar_sesion()">Cerrar
+          sesion</button>
+        <button class="button is-link is-profile" onclick="abrir_modal_pedidos()">Mis pedidos</button>
+      </footer>
+    </div>
+  </div>
+  
+  <div class="modal" id="modal-pedidos">
+    <div class="modal-background" onclick="cerrar_modal_pedidos()"></div>
+    <div class="modal-card" style="width: 800px">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Mis pedidos</p>
+        <button class="delete" onclick="cerrar_modal_pedidos()"></button>
+      </header>
+
+      <section class="modal-card-body">
+        <table class="table is-fullwidth">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Fecha</th>
+              <th>Total</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-pedidos"></tbody>
+        </table>
+      </section>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-editar-pedido">
+    <div class="modal-background" onclick="cerrar_modal_editar()"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Editar pedido</p>
+        <button class="delete" onclick="cerrar_modal_editar()"></button>
+      </header>
+
+      <section class="modal-card-body">
+        <div id="contenedor-productos-pedido"></div>
+      </section>
+
+      <footer class="modal-card-foot">
+        <button class="button is-primary" onclick="guardar_cambios_pedido()">
+          Guardar cambios
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+  <script src="./js/perfil.js"></script>
+  <script>
+    async function cargarFooter() {
+      const respuesta = await fetch("./footer.html");
+      const html = await respuesta.text();
+      document.getElementById("footer-placeholder").innerHTML = html;
+    }
+    cargarFooter();
+
+  </script>
+</body>
+
+</html>
