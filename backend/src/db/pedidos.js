@@ -31,23 +31,20 @@ export async function get_order(id_pedido) {
   };
 }
 
-export async function create_order(id_cliente, domicilio_entrega, estado, repartidor, productos) {
+export async function create_order(id_cliente, domicilio_entrega, estado, repartidor, productos, total) {
   const pedido = await pool.query(
     `INSERT INTO pedidos (id_cliente, domicilio_entrega, estado, repartidor, total)
-     VALUES ($1, $2, $3, $4, 0)
+     VALUES ($1, $2, $3, $4, $5)
      RETURNING id_pedido`,
-    [id_cliente, domicilio_entrega, estado, repartidor]
+    [id_cliente, domicilio_entrega, estado, repartidor, total]
   );
 
   const id_pedido = pedido.rows[0].id_pedido;
 
-  let total = 0;
   for (const producto of productos) {
     const prod = await pool.query("SELECT precio FROM productos WHERE id_producto = $1", [producto.id_producto]);
 
     const precio_unitario = prod.rows[0].precio;
-    const subtotal = precio_unitario * producto.cantidad;
-    total += subtotal;
 
     await pool.query(
       `INSERT INTO pedido_productos 
@@ -56,11 +53,6 @@ export async function create_order(id_cliente, domicilio_entrega, estado, repart
       [id_pedido, producto.id_producto, producto.cantidad, precio_unitario]
     );
   }
-
-  await pool.query(
-    `UPDATE pedidos SET total = $1 WHERE id_pedido = $2`,
-    [total, id_pedido]
-  );
 
   return { id_pedido, total };
 }

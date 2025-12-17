@@ -253,13 +253,16 @@
 
         const usuario = JSON.parse(usuarioJSON);
 
-        
-
         const productos = carrito.map(function (item) {
           return {
             id_producto: item.id_producto,
             cantidad: item.cantidad
           };
+        });
+
+        let total = 0;
+        carrito.forEach(item => {
+          total += calcularSubtotalConDescuento(item);
         });
 
         const response = await fetch("http://localhost:3000/pedidos", {
@@ -272,7 +275,8 @@
             domicilio_entrega: usuario.direccion,
             estado: "Pendiente",
             repartidor: "A asignar",
-            productos: productos
+            productos: productos,
+            total: total
           })
         });
 

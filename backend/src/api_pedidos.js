@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-    const { id_cliente, domicilio_entrega, estado, repartidor, productos } = req.body;
+    const { id_cliente, domicilio_entrega, estado, repartidor, productos, total } = req.body;
 
     if (!id_cliente || !domicilio_entrega || !estado || !productos) {
         return res.status(400).send("Faltan campos obligatorios");
@@ -24,7 +24,8 @@ router.post("/", async (req, res) => {
         domicilio_entrega,
         estado,
         repartidor,
-        productos
+        productos,
+        total
     );
 
     res.status(201).json(pedido);
