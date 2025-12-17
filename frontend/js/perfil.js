@@ -5,17 +5,23 @@ async function cargarNavbar() {
 
     botonUsuario = document.getElementById("btn-usuario");
     usuariologueado = localStorage.getItem("usuario_actual");
+    botonAdmin = document.getElementById("btn-admin");
 
     if (usuariologueado) {
+      if (usuariologueado.email !== "admin@admin.com") {
+        botonAdmin.style.display = "none";
+      }
+        botonAdmin.style.display = null;
         botonUsuario.textContent = "Perfil 👤";
         botonUsuario.removeAttribute("href");
         botonUsuario.onclick = function () {
             abrir_perfil();
         };
     } else {
-        botonUsuario.textContent = "Ingresar 👤";
-        botonUsuario.href = "./ingresar.html";
-        botonUsuario.onclick = null;
+      botonAdmin.style.display = "none";
+      botonUsuario.textContent = "Ingresar 👤";
+      botonUsuario.href = "./ingresar.html";
+      botonUsuario.onclick = null;
     }
 }
 cargarNavbar();

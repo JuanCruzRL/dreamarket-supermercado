@@ -202,7 +202,7 @@
                 </p>
 
                 <button
-                  class="button is-danger is-small btn-agregar-carrito"
+                  class="button is-primary is-small btn-agregar-carrito"
                   onclick="clickAgregarProducto(this)"
                   data-id-producto="${producto.id_producto}"
                   data-nombre="${producto.nombre}"
@@ -218,6 +218,14 @@
           </div>
         `;
       });
+    }
+
+    function mezclar(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
     }
 
     async function cargar_descuentos() {
@@ -237,9 +245,9 @@
         producto => regex_dreamweek.test(producto.descuento)
       );
 
-      const cuatro_prod_porcentaje = productos_porcentaje.slice(0, 4);
-      const cuatro_prod_multiplo = productos_multiplo.slice(0, 4);
-      const cuatro_prod_dreamweek = productos_dreamweek.slice(0, 4);
+      const cuatro_prod_porcentaje = mezclar(productos_porcentaje).slice(0, 4);
+      const cuatro_prod_multiplo = mezclar(productos_multiplo).slice(0, 4);
+      const cuatro_prod_dreamweek = mezclar(productos_dreamweek).slice(0, 4);
 
       mostrar_productos("descuentos-dia", cuatro_prod_porcentaje);
       mostrar_productos("descuentos-3x2", cuatro_prod_multiplo);
