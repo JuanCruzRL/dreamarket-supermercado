@@ -1,4 +1,4 @@
-.PHONY: front start stop back build
+.PHONY: front start stop back build db restart
 
 front:
 	docker compose up -d frontend
@@ -15,3 +15,7 @@ start:
 stop:
 	docker compose down
 
+db:
+	docker compose up db
+
+restart: stop start
