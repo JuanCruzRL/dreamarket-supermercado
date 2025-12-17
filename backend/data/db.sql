@@ -123,4 +123,5 @@ INSERT INTO usuarios (email, nombre, apellido, telefono, direccion, contrasenia)
 ('sofia.lopez@correo.com', 'Sofia', 'Lopez', '1156789012', 'Av. Cabildo 2500, CABA', 'sofia123'),
 ('tomas.martinez@correo.com', 'Tomas', 'Martinez', '1167890123', 'Av. Rivadavia 8000, CABA', 'tomas123'),
 ('valentina.romero@correo.com', 'Valentina', 'Romero', '1178901234', 'Av. Belgrano 1500, CABA', 'valen123'),
-('martin.suarez@correo.com', 'Martin', 'Suarez', '1189012345', 'Av. Libertador 5000, CABA', 'martin123');
+('martin.suarez@correo.com', 'Martin', 'Suarez', '1189012345', 'Av. Libertador 5000, CABA', 'martin123'),
+('admin@admin.com', 'admin', 'admin', '12345678', 'admin', '123');
