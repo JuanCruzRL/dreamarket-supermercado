@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
-  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="./styles/main.css" />
   <title>Productos</title>
 </head>
 
@@ -235,7 +235,7 @@
       }
       cargarFooter();
 
-    const url_productos = "https://dreamarket.onrender.com/productos";
+    const url_productos = "http://localhost:3000/productos";
     const regex_porcentaje = /^[0-9]+%$/;
     const regex_multiplo = /^[0-9]+x[0-9]+$/i;
     const regex_dreamweek = /dreamweek/i;
@@ -308,7 +308,7 @@
                     </p>
 
                     <button
-                      class="button is-danger is-small btn-agregar-carrito"
+                      class="button is-primary is-small btn-agregar-carrito"
                       onclick="clickAgregarProducto(this)"
                       data-id-producto="${producto.id_producto}"
                       data-nombre="${producto.nombre}"

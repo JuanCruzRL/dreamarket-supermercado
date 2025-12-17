@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
-  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="./styles/main.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <title>Dreamarket - Descuentos</title>
 </head>
@@ -18,12 +18,12 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <figure class="image is-5by1">
-              <img src="imagenes/banner_ofertas.png">
+              <img src="./imagenes/banner_ofertas.png">
             </figure>
           </div>
           <div class="swiper-slide">
             <figure class="image is-16by7">
-              <img src="imagenes/banner_ofertas2.png">
+              <img src="./imagenes/banner_ofertas2.png">
             </figure>
           </div>
         </div>
@@ -140,7 +140,7 @@
         document.getElementById("footer-placeholder").innerHTML = html;
       }
       cargarFooter();
-    const URL_PRODUCTOS = "https://dreamarket.onrender.com/productos";
+    const URL_PRODUCTOS = "http://localhost:3000/productos";
     const regex_porcentaje = /^[0-9]+%$/;
     const regex_3x2 = /3x2/i;
     const regex_dreamweek = /dreamweek/i;
@@ -202,7 +202,7 @@
                 </p>
 
                 <button
-                  class="button is-danger is-small btn-agregar-carrito"
+                  class="button is-primary is-small btn-agregar-carrito"
                   onclick="clickAgregarProducto(this)"
                   data-id-producto="${producto.id_producto}"
                   data-nombre="${producto.nombre}"
@@ -218,6 +218,14 @@
           </div>
         `;
       });
+    }
+
+    function mezclar(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
     }
 
     async function cargar_descuentos() {
@@ -237,9 +245,9 @@
         producto => regex_dreamweek.test(producto.descuento)
       );
 
-      const cuatro_prod_porcentaje = productos_porcentaje.slice(0, 4);
-      const cuatro_prod_multiplo = productos_multiplo.slice(0, 4);
-      const cuatro_prod_dreamweek = productos_dreamweek.slice(0, 4);
+      const cuatro_prod_porcentaje = mezclar(productos_porcentaje).slice(0, 4);
+      const cuatro_prod_multiplo = mezclar(productos_multiplo).slice(0, 4);
+      const cuatro_prod_dreamweek = mezclar(productos_dreamweek).slice(0, 4);
 
       mostrar_productos("descuentos-dia", cuatro_prod_porcentaje);
       mostrar_productos("descuentos-3x2", cuatro_prod_multiplo);

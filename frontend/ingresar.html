@@ -7,7 +7,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
     />
-    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="./styles/main.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
@@ -19,7 +19,7 @@
       <div class="navbar-brand">
         <a class="logo" href="./index.html">
           <img
-            src="imagenes/logo.png"
+            src="./imagenes/logo.png"
             alt="Dreamarket"
             width="112"
             height="50"
@@ -123,7 +123,7 @@
       }
       cargarFooter();
 
-      const baseApiUrl = "https://dreamarket.onrender.com/usuarios";
+      const baseApiUrl = "http://localhost:3000/usuarios";
       const loginEmailInput = document.getElementById("login-email");
       const loginContraseniaInput = document.getElementById("login-contrasenia");
       const registroEmailInput = document.getElementById("registro-email");
