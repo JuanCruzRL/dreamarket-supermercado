@@ -12,7 +12,7 @@ export async function get_order(id_pedido) {
   }
 
   const productos = await pool.query(
-    `SELECT pp.id_producto, producto.nombre, pp.cantidad, pp.precio_unitario
+    `SELECT pp.id_producto, producto.nombre, pp.cantidad, pp.precio_unitario, producto.descuento
      FROM pedido_productos pp
      JOIN productos producto ON producto.id_producto = pp.id_producto
      WHERE pp.id_pedido = $1`,
@@ -75,16 +75,9 @@ export async function delete_order(id_pedido) {
   await pool.query("DELETE FROM pedidos WHERE id_pedido = $1", [id_pedido]);
 }
 
-export async function update_order_products(id_pedido, productos) {
-  let total = 0;
+export async function update_order_products(id_pedido, productos, total) {
 
   for (const producto of productos) {
-    const prod = await pool.query(
-      "SELECT precio FROM productos WHERE id_producto = $1",
-      [producto.id_producto]
-    );
-
-    const precio_unitario = prod.rows[0].precio;
 
     await pool.query(
       `UPDATE pedido_productos
@@ -93,7 +86,7 @@ export async function update_order_products(id_pedido, productos) {
       [producto.cantidad, id_pedido, producto.id_producto]
     );
 
-    total += precio_unitario * producto.cantidad;
+    
   }
 
   await pool.query(
