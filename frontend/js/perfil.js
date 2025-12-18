@@ -6,12 +6,11 @@ async function cargarNavbar() {
     botonUsuario = document.getElementById("btn-usuario");
     usuariologueado = localStorage.getItem("usuario_actual");
     botonAdmin = document.getElementById("btn-admin");
-
     if (usuariologueado) {
-      if (usuariologueado.email !== "admin@admin.com") {
-        botonAdmin.style.display = "none";
-      }
+      botonAdmin.style.display = "none";
+      if (JSON.parse(usuariologueado).email === "admin@admin.com") {
         botonAdmin.style.display = null;
+      } 
         botonUsuario.textContent = "Perfil 👤";
         botonUsuario.removeAttribute("href");
         botonUsuario.onclick = function () {
