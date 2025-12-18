@@ -65,9 +65,9 @@ router.put("/:id/productos", async (req, res) => {
   if (!get_order(id_pedido)){
     return res.status(404).send("No se encontro el pedido");
   }
-  const { productos } = req.body;
+  const { productos, total } = req.body;
 
-  const resultado = await update_order_products(id_pedido, productos);
+  const resultado = await update_order_products(id_pedido, productos, total);
 
   return res.status(200).json(resultado);
 });
