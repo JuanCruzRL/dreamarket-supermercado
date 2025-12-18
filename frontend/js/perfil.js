@@ -6,12 +6,11 @@ async function cargarNavbar() {
     botonUsuario = document.getElementById("btn-usuario");
     usuariologueado = localStorage.getItem("usuario_actual");
     botonAdmin = document.getElementById("btn-admin");
-
     if (usuariologueado) {
-      if (usuariologueado.email !== "admin@admin.com") {
-        botonAdmin.style.display = "none";
-      }
+      botonAdmin.style.display = "none";
+      if (JSON.parse(usuariologueado).email === "admin@admin.com") {
         botonAdmin.style.display = null;
+      } 
         botonUsuario.textContent = "Perfil 👤";
         botonUsuario.removeAttribute("href");
         botonUsuario.onclick = function () {
@@ -236,7 +235,54 @@ async function editar_pedido(idPedido) {
   document.getElementById("modal-editar-pedido").classList.add("is-active");
 }
 
+function calcularPrecioFinalProducto(item) {
+  const regex_porcentaje = /^[0-9]+%$/;
+  const regex_multiplo = /^[0-9]+x[0-9]+$/i;
+  const precioUnitario = Number(item.precio_unitario);
+  const cantidad = Number(item.cantidad);
+  const descuento = (item.descuento || "").trim().toLowerCase();
+
+  if (isNaN(precioUnitario) || isNaN(cantidad) || cantidad <= 0) {
+    return 0;
+  }
+  if (descuento === "") {
+    return precioUnitario * cantidad;
+  }
+
+  if (descuento === "dreamweek") {
+    return precioUnitario * cantidad * 0.5;
+  }
+
+  if (regex_porcentaje.test(descuento)) {
+    num_descuento = parseInt(descuento.replace("%", ""));
+    if (num_descuento > 0 && num_descuento <= 100) {
+      return precioUnitario * cantidad * (1 - num_descuento / 100);
+    }
+  }
+
+  if (regex_multiplo.test(descuento)) {
+    const partes = descuento.toLowerCase().split("x");
+    const llevas = parseInt(partes[0], 10);
+    const pagas = parseInt(partes[1], 10);
+
+    if (llevas > 0 && pagas > 0 && pagas <= llevas) {
+      const grupos = Math.floor(cantidad / llevas);
+      const unidadesPagas = grupos * pagas;
+      const resto = cantidad % llevas;
+
+      return (unidadesPagas + resto) * precioUnitario;
+    }
+  }
+
+  return precioUnitario * cantidad;
+}
+
+
 async function guardar_cambios_pedido() {
+  let total = 0;
+  productosEditando.forEach(item => {
+    total += calcularPrecioFinalProducto(item);
+  });
   await fetch(`http://localhost:3000/pedidos/${pedidoEditandoId}/productos`, {
     method: "PUT",
     headers: {
@@ -246,7 +292,8 @@ async function guardar_cambios_pedido() {
       productos: productosEditando.map(p => ({
         id_producto: p.id_producto,
         cantidad: p.cantidad
-      }))
+      })),
+      total: Math.round(total)
     })
   });
 

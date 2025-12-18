@@ -125,8 +125,54 @@
           cuenta</button>
         <button class="button is-primary is-profile" id="btn-modificar-perfil" onclick="cerrar_sesion()">Cerrar
           sesion</button>
+        <button class="button is-link is-profile" onclick="abrir_modal_pedidos()">Mis pedidos</button>
       </footer>
     </div>
+  </div>
+
+  <div class="modal" id="modal-pedidos">
+      <div class="modal-background" onclick="cerrar_modal_pedidos()"></div>
+      <div class="modal-card" style="width: 800px">
+          <header class="modal-card-head">
+              <p class="modal-card-title">Mis pedidos</p>
+              <button class="delete" onclick="cerrar_modal_pedidos()"></button>
+          </header>
+
+          <section class="modal-card-body">
+              <table class="table is-fullwidth">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Fecha</th>
+                          <th>Total</th>
+                          <th>Estado</th>
+                          <th>Acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody id="tabla-pedidos"></tbody>
+              </table>
+          </section>
+      </div>
+  </div>
+
+  <div class="modal" id="modal-editar-pedido">
+      <div class="modal-background" onclick="cerrar_modal_editar()"></div>
+      <div class="modal-card">
+          <header class="modal-card-head">
+              <p class="modal-card-title">Editar pedido</p>
+              <button class="delete" onclick="cerrar_modal_editar()"></button>
+          </header>
+
+          <section class="modal-card-body">
+              <div id="contenedor-productos-pedido"></div>
+          </section>
+
+          <footer class="modal-card-foot">
+              <button class="button is-primary" onclick="guardar_cambios_pedido()">
+                  Guardar cambios
+              </button>
+          </footer>
+      </div>
   </div>
 
   <div id="footer-placeholder"></div>

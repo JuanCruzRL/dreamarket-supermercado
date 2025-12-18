@@ -42,7 +42,7 @@ INSERT INTO productos (nombre, marca, precio, stock, categoria, imagen, descuent
 ('Aceite de Girasol 1.5L', 'Natura', 3950.0, 28, 'Aceites y condimentos', 'https://ardiaprod.vtexassets.com/arquivos/ids/339807/Aceite-de-Girasol-Natura-15-Lt-_1.jpg?v=638778391546900000', '20%'),
 ('Yerba Mate 1kg', 'Playadito', 5200.0, 35, 'Infusiones', 'https://ardiaprod.vtexassets.com/arquivos/ids/320684/Yerba-Mate-Playadito-Suave-1-Kg-_1.jpg?v=638949374251000000', 'dreamweek'),
 ('Coca Cola 2.25L', 'Coca Cola', 3100.0, 60, 'Bebidas sin alcohol', 'https://jumboargentina.vtexassets.com/arquivos/ids/783070/Gaseosa-Coca-cola-Sabor-Original-2-25-L-1-247191.jpg?v=638206690815300000', '2x1'),
-('Cerveza Rubia 1L', 'Quilmes', 2850.0, 40, 'Bebidas alcohólicas', 'https://carrefourar.vtexassets.com/arquivos/ids/680150/7792798007387_01.jpg?v=638872392288670000', '3x2'),
+('Cerveza Rubia 1L', 'Quilmes', 2850.0, 40, 'Bebidas alcohólicas', 'https://cdn.batitienda.com/baticloud/images/product_picture_168e2bdf8fca4bf2add196a2213671a0_637861954762500696_0_m.jpg', '3x2'),
 ('Pan de Mesa 550g', 'Fargo', 2100.0, 25, 'Panaderia', 'https://jumboargentina.vtexassets.com/arquivos/ids/814202/Pan-Fargo-Lacteado-550-Gr-1-944982.jpg?v=638452498401130000', '10%'),
 ('Hamburguesas de Carne 4u', 'Swift', 4200.0, 18, 'Hamburguesas', 'https://www.casa-segal.com/wp-content/uploads/2021/02/swift-hamburguesa-clasica-4u-x-80g-320gr-ofertas-casa-segal-supermercado-mendoza.jpg', 'dreamweek'),
 ('Helado Dulce de Leche 1L', 'Grido', 3400.0, 22, 'Helados', 'https://storage.googleapis.com/comprarporwhatsapp-19eb8.appspot.com/tvLMvbEaj9OJPme0Bm0k/products/NmgyCc3GxLbTCSEcZlpCi.png', '2x1'),
@@ -114,7 +114,8 @@ INSERT INTO productos (nombre, marca, precio, stock, categoria, imagen, descuent
 ('Roast Beef x kg', 'Coto', 9200, 14, 'Carne vacuna', 'https://static.cotodigital3.com.ar/sitios/fotos/large/00047900/00047985.jpg', ''),
 ('Pechuga de Pollo x kg', 'Coto', 8900, 18, 'Pollo', 'https://static.cotodigital3.com.ar/sitios/fotos/large/00042200/00042218.jpg', '10%'),
 ('Salame Milán 910g', 'Paladini', 7200, 16, 'Embutidos', 'https://static.cotodigital3.com.ar/sitios/fotos/large/00038600/00038616.jpg', '10%'),
-('Chorizo Parrillero x kg', 'Sofía', 10100, 22, 'Embutidos', 'https://www.alimentosofia.com.ar/wp-content/uploads/2016/10/chorizo-parrillero.jpg', '');
+('Chorizo Parrillero x kg', 'Sofía', 10100, 22, 'Embutidos', 'https://www.alimentosofia.com.ar/wp-content/uploads/2016/10/chorizo-parrillero.jpg', ''),
+('Peugeot 208', 'Peugeot', 30000000, 1, 'Autos', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdkKOu3pLg0ToZ3CtD1cV97937fVb34ObIG6ZX9hEHkcsAE4vQ5lABSBhTDKG8Ib8HcY7qB2axqHzE9E4is00g_xjI5RJu6vHOfY8-_A&s=10', '99%');
 
 INSERT INTO usuarios (email, nombre, apellido, telefono, direccion, contrasenia) VALUES
 ('juan.perez@correo.com', 'Juan', 'Perez', '1123456789', 'Av. Corrientes 1234, CABA', 'juan123'),
@@ -123,4 +124,6 @@ INSERT INTO usuarios (email, nombre, apellido, telefono, direccion, contrasenia)
 ('sofia.lopez@correo.com', 'Sofia', 'Lopez', '1156789012', 'Av. Cabildo 2500, CABA', 'sofia123'),
 ('tomas.martinez@correo.com', 'Tomas', 'Martinez', '1167890123', 'Av. Rivadavia 8000, CABA', 'tomas123'),
 ('valentina.romero@correo.com', 'Valentina', 'Romero', '1178901234', 'Av. Belgrano 1500, CABA', 'valen123'),
-('martin.suarez@correo.com', 'Martin', 'Suarez', '1189012345', 'Av. Libertador 5000, CABA', 'martin123');
+('martin.suarez@correo.com', 'Martin', 'Suarez', '1189012345', 'Av. Libertador 5000, CABA', 'martin123'),
+('admin@admin.com', 'admin', 'admin', '12345678', 'admin', '123'),
+('martin@gmail.com', 'Martin', 'Maulhardt', '112346', 'Av Paseo Colon 850', '123');
