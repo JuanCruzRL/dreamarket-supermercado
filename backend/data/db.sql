@@ -115,7 +115,10 @@ INSERT INTO productos (nombre, marca, precio, stock, categoria, imagen, descuent
 ('Pechuga de Pollo x kg', 'Coto', 8900, 18, 'Pollo', 'https://static.cotodigital3.com.ar/sitios/fotos/large/00042200/00042218.jpg', '10%'),
 ('Salame Milán 910g', 'Paladini', 7200, 16, 'Embutidos', 'https://static.cotodigital3.com.ar/sitios/fotos/large/00038600/00038616.jpg', '10%'),
 ('Chorizo Parrillero x kg', 'Sofía', 10100, 22, 'Embutidos', 'https://www.alimentosofia.com.ar/wp-content/uploads/2016/10/chorizo-parrillero.jpg', ''),
-('Peugeot 208', 'Peugeot', 30000000, 1, 'Autos', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdkKOu3pLg0ToZ3CtD1cV97937fVb34ObIG6ZX9hEHkcsAE4vQ5lABSBhTDKG8Ib8HcY7qB2axqHzE9E4is00g_xjI5RJu6vHOfY8-_A&s=10', '99%');
+('Peugeot 208', 'Peugeot', 30000000, 1, 'Autos', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdkKOu3pLg0ToZ3CtD1cV97937fVb34ObIG6ZX9hEHkcsAE4vQ5lABSBhTDKG8Ib8HcY7qB2axqHzE9E4is00g_xjI5RJu6vHOfY8-_A&s=10', '99%'),
+('Filet de Merluza Sin Piel 400g', 'Pescanova', 6200, 25, 'Pescado', 'https://redonsella.com/wp-content/uploads/2024/06/097050-filet-llu-s-p-400.jpg', '10%'),
+('Salmón Rosado Fresco x kg', 'Berardi', 39800, 6, 'Pescado', 'https://www.berardisa.com.ar/wp-content/uploads/2022/03/Filet-de-Salmon-Rosado-FRESCO-1kg.png', '10%'),
+('Atún Rojo 400g', 'Berardi', 28500, 12, 'Pescado', 'https://www.berardisa.com.ar/wp-content/uploads/2024/09/Atun-Rojo-en-Porciones-Berardi.png', '20%');
 
 INSERT INTO usuarios (email, nombre, apellido, telefono, direccion, contrasenia) VALUES
 ('juan.perez@correo.com', 'Juan', 'Perez', '1123456789', 'Av. Corrientes 1234, CABA', 'juan123'),
