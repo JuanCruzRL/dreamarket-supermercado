@@ -1,43 +1,51 @@
 # Dreamarket
 
 
-Dreamarket es una aplicación web de supermercado online que permite visualizar productos por categorías, gestionar un carrito de compras y administrar pedidos de forma sencilla. Llevando registro de los productos que quiere comprar el usuario, dandole posibilidad de eliminar su pedido, modificarlo, ver su perfil, modificarlo a gusto, cerrar sesion y eliminar su cuenta.
+Dreamarket es una aplicación web de supermercado online que permite visualizar productos por categorías, gestionar un carrito de compras y administrar pedidos de forma sencilla. Llevando registro de los productos que quiere comprar el usuario, dándole posibilidad de eliminar su pedido, modificarlo, ver su perfil, modificar sus datos, cerrar sesión y eliminar su cuenta.
 
-Dreamarket cuenta con un sistema de gestion de productos desde un panel de administracion, con facil acceso desde la pagina principal.
+Dreamarket cuenta con un sistema de gestión de productos desde un panel de administración, con fácil acceso desde la página principal.
+
+
+## Tecnologías usadas
+
+La página está desarrollada con frontend y backend separados, comunicados entre sí mediante una API REST. El frontend se sirve mediante Nginx y se encarga de la interfaz gráfica y de la interacción con el usuario, permitiendo navegar las distintas secciones del supermercado. Por otro lado, el backend se encarga de gestionar usuarios, productos y pedidos con la información que le envía el frontend.
+
+La información (usuarios, productos, pedidos) se almacena en una base de datos Postgres, con un modelo relacional que incluye primary keys, foreign keys y una tabla intermedia para gestionar los pedidos y sus productos, dado que se trata de una relación many-to-many.
+
+Todo el sistema se ejecuta dentro de contenedores Docker, utilizando Docker Compose para levantar los distintos servicios y mapear los puertos necesarios. Además, se provee un Makefile que simplifica los comandos necesarios para construir y levantar el proyecto.
 
 
 ## Entidades
 
-*  USUARIOS --> | Id_usuario (pk) | Email | Nombre | Apellido | Telefono | Direccion | Contraseña |
+*  USUARIOS --> | Id_usuario (PK) | Email | Nombre | Apellido | Teléfono | Dirección | Contraseña |
 
 
 
-*  PEDIDOS --> | Id_pedido (pk) | Id_cliente (fk) | Domicilio_entrega | Estado | Repartidor | Total | Fecha_creacion |
+*  PEDIDOS --> | Id_pedido (PK) | Id_cliente (FK) | Domicilio_entrega | Estado | Repartidor | Total | Fecha_creación |
 
 
 
-*  PRODUCTOS --> | Id_producto (pk) | Nombre | Marca | Precio | Categoria | Imagen | Descuento |
+*  PRODUCTOS --> | Id_producto (PK) | Nombre | Marca | Precio | Categoría | Imagen | Descuento |
 
+Aclaración: existe una tabla intermedia para la gestión de pedidos (pedido_productos) con 5 campos: 
 
+| Id_pedido (FK) | Id_producto (FK) | Cantidad | Precio_unitario | (Id_pedido, Id_producto) (PK) |
 
-Aclaracion: existe una tabla intermedia para la gestion de pedidos (pedido_productos) con 5 campos: 
+<img width="1199" height="794" alt="grafico_tablas_sql" src="https://github.com/user-attachments/assets/449c8583-0285-461a-881a-6ff54c49850f" />
 
-| Id_pedido (fk) | Id_producto (fk) | Cantidad | Precio_unitario | (Id_pedido, Id_producto) (pk) |
+## Páginas
 
-
-## Paginas
-
-1)  Home --> Banners publicitarios, categorias de productos, banner de descuento abajo del todo (con boton hacia la pagina de descuentos).
-2)  Navbar --> Logo del supermercado (izquierda del todo), boton de descuentos, botones por categoria de productos, panel de admin, carrito y ingersar/perfil.
+1)  Home --> Banners publicitarios, algunas categorías de productos, banner de descuento abajo del todo (con botón hacia la página de descuentos).
+2)  Navbar --> Logo del supermercado (izquierda del todo), botón de descuentos, botones por categoría de productos, panel de admin, carrito e ingresar/perfil.
 3)  Descuentos --> Banners publicitarios, secciones con distintos tipos de descuento.
-4)  Footer --> Descripcion breve del supermercado, seccion de ayuda (no funciona), seccion de pagos (tampoco funciona), seccion de contacto (tampoco) y seccion seguinos (andate moretti)
-5)  Productos --> Menu de filtros a la izquierda, busqueda de productos en la parte superior, banner publicitario vertical, productos en el medio (tarjetitas con la info)
-6)  Admin --> Boton de inicio a la derecha arriba del todo, tabla para la gestion de productos (con boton de creacion/eliminacion/modificacion).
-7)  Carrito --> Tabla con informacion de los productos seleccionados, boton para finalizar compra y vaciar el carrito.
-8)  Log in --> 2 botones, el de ingresar con cuenta ya creada (pide mail y contraseña) y el de registrarse.
-9)  Sign in --> Formulario para llenar con tu info de usuario, boton de registrarme abajo.
+4)  Footer --> Descripción breve del supermercado, sección de ayuda (no funciona), sección de pagos (tampoco funciona), sección de contacto (tampoco) y sección seguinos (andate moretti)
+5)  Productos --> Menú de filtros a la izquierda, búsqueda de productos en la parte superior, banner publicitario vertical, productos en el medio (tarjetitas con la info)
+6)  Panel de admin --> Botón de inicio a la derecha arriba del todo, tabla para la gestión de productos (con botón de creación/eliminación/edición).
+7)  Carrito --> Tabla con información de los productos seleccionados, botón para finalizar compra y vaciar el carrito.
+8)  Log in --> 2 botones, el de ingresar con cuenta ya creada (pide email y contraseña) y el de registrarse (pide el email).
+9)  Sign in --> Formulario para llenar con tu información personal, botón para registrarse abajo.
 
-## Como levantar y configurar el sistema
+## Cómo levantar y configurar el sistema
 
 ### Requisitos previos
 
@@ -53,7 +61,7 @@ Utilizando el makefile provisto en los archivos se pueden ejecutar las siguiente
 ### Ambos a la vez
 
 ```
-make build     # Construye las imagenes
+make build     # Construye las imágenes
 make start     # Levanta frontend y backend
 make stop      # Detiene los contenedores
 ```
@@ -67,20 +75,17 @@ make stop      # Detiene los contenedores
 ### Front y back por separado
 
 ```
-make build     # Construye las imagenes
+make build     # Construye las imágenes
 make front     # Levanta solo el frontend
 make back      # Levanta solo el backend
 make stop      # Detiene los contenedores
 ```
 
 <img width="1400" height="778" alt="image" src="https://github.com/user-attachments/assets/1c6f69c8-036a-4557-966f-8d502e0734ad" />
-<img width="1482" height="109" alt="image" src="https://github.com/user-attachments/assets/e2a61251-8463-446f-8155-bc9cc1781b42" />
+<img width="1410" height="109" alt="image" src="https://github.com/user-attachments/assets/9967cdfb-d0c3-4260-be5d-feb4d855a0fe" />
 <img width="1402" height="93" alt="image" src="https://github.com/user-attachments/assets/931cee48-c479-4d06-ac86-47e18533d6b4" />
 <img width="579" height="132" alt="image" src="https://github.com/user-attachments/assets/fb0e8a23-c952-44a7-b196-80fbe0f13e9e" />
 
+
 ---
 
-### Funcionamiento del sistema
-
-*  El frontend se sirve mediante Nginx y permite navegar las distintas secciones del supermercado.
-*  El backend expone una API REST que gestiona usuarios, productos y pedidos.
