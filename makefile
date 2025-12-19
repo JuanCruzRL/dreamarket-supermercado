@@ -16,7 +16,7 @@ stop:
 	docker compose down
 
 db:
-	docker compose up db
+	docker compose up -d db
 
 restart: stop start
 
