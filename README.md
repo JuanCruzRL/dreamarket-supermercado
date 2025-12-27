@@ -38,7 +38,7 @@ Aclaración: existe una tabla intermedia para la gestión de pedidos (pedido_pro
 1)  Home --> Banners publicitarios, algunas categorías de productos, banner de descuento abajo del todo (con botón hacia la página de descuentos).
 2)  Navbar --> Logo del supermercado (izquierda del todo), botón de descuentos, botones por categoría de productos, panel de admin, carrito e ingresar/perfil.
 3)  Descuentos --> Banners publicitarios, secciones con distintos tipos de descuento.
-4)  Footer --> Descripción breve del supermercado, sección de ayuda (no funciona), sección de pagos (tampoco funciona), sección de contacto (tampoco) y sección seguinos (andate moretti)
+4)  Footer --> Descripción breve del supermercado, sección de ayuda, sección de pagos, sección de contacto y sección seguinos.
 5)  Productos --> Menú de filtros a la izquierda, búsqueda de productos en la parte superior, banner publicitario vertical, productos en el medio (tarjetitas con la info)
 6)  Panel de admin --> Botón de inicio a la derecha arriba del todo, tabla para la gestión de productos (con botón de creación/eliminación/edición).
 7)  Carrito --> Tabla con información de los productos seleccionados, botón para finalizar compra y vaciar el carrito.
